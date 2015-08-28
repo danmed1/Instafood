@@ -182,6 +182,24 @@ ul.alert-dropdown {
     min-height: 100px;/* POR CAMBIAR */
 }
 
+.panel-food1{
+    background-image: url(../img/surimi.png);
+    max-height: 200px;/* POR CAMBIAR */
+    min-height: 100px;/* POR CAMBIAR */
+}
+
+.panel-food2{
+    background-image: url(../img/tacosFrutales.png);
+    max-height: 200px;/* POR CAMBIAR */
+    min-height: 100px;/* POR CAMBIAR */
+}
+
+.panel-food3{
+    background-image: url(../img/quicheCalabaza.png);
+    max-height: 200px;/* POR CAMBIAR */
+    min-height: 100px;/* POR CAMBIAR */
+}
+
 .panel-green {
     border-color: #5cb85c;
     
@@ -237,3 +255,6 @@ ul.alert-dropdown {
     color: #df8a13;
 }
 
+.panel-pasos{
+    color: #df8a13;
+}
