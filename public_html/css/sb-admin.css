@@ -237,3 +237,15 @@ ul.alert-dropdown {
     color: #df8a13;
 }
 
+/*Modificaciones Alejandro Inicio*/
+.panel-primary .panel-ingrediente{
+    
+}
+.col-lg-2 img{
+    max-height: 100%;
+    max-width: 100%;
+}
+.selected{
+    background-color: green;
+}
+/*Modificaciones Alejandro FIn*/
