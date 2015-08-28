@@ -9,6 +9,7 @@
 body {
     margin-top: 100px;
     background-color: #222;
+    
 }
 
 @media(min-width:768px) {
@@ -24,7 +25,7 @@ body {
 #page-wrapper {
     width: 100%;
     padding: 0;
-    background-color: #fff;
+    background-color: #fff;    
 }
 
 .huge {
@@ -57,7 +58,7 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
-    color: #999;
+    color: white;
 }
 
 .top-nav>li>a:hover,
@@ -66,7 +67,6 @@ body {
 .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
     color: #AF0002;
-    background-color: #000;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -122,7 +122,7 @@ ul.alert-dropdown {
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #222;
+        background-color: #F2C97B;
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
@@ -135,7 +135,7 @@ ul.alert-dropdown {
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #000 !important;
+        background-color: #CBA765 !important;
     }
 }
 
@@ -147,7 +147,7 @@ ul.alert-dropdown {
     display: block;
     padding: 10px 15px 10px 38px;
     text-decoration: none;
-    color: #999;
+    color: white;
 }
 
 .side-nav>li>ul>li>a:hover {
@@ -170,10 +170,21 @@ ul.alert-dropdown {
 
 .huge {
     font-size: 40px;
+    background-color: rgba(255, 255, 255, 0.5); /* nuevo */
+    max-width: 100%;/* nuevo */
+    float: right;/* nuevo */
+}
+
+/* Panel de imagenes en el inicio para los cuadritos */
+.panel-food{
+    background-image: url(../img/inicio.png);
+    max-height: 200px;/* POR CAMBIAR */
+    min-height: 100px;/* POR CAMBIAR */
 }
 
 .panel-green {
     border-color: #5cb85c;
+    
 }
 
 .panel-green > .panel-heading {
@@ -225,3 +236,4 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
