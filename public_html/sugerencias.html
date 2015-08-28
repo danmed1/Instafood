@@ -204,7 +204,7 @@
                                     </select>
                                 </div>
 
-                                <button type="button" class="btn btn-danger">Quitar</button>
+                                <button type="button" class="btn btn-danger" id="quitarInc">Quitar</button>
                                 <button type="button" class="btn btn-primary">Buscar recetas</button>                               
 
                             </form>
@@ -223,7 +223,7 @@
                                 </select>
                             </div>
 
-                            <button type="button" class="btn btn-danger">Quitar</button>
+                            <button type="button" class="btn btn-danger" id="quitarExc">Quitar</button>
                         </div>
                     </div>
                     <!-- /.row -->
@@ -285,8 +285,18 @@
                         m.value='';
                     }
                 });                
+                $("#quitarInc").click(function(){
+                   $("#listaIncluidos option:selected").each(function(index,element){
+                           $(this).remove();
+                       }) ;
+                });
+                $("#quitarExc").click(function(){
+                   $("#listaExcl option:selected").each(function(index,element){
+                           $(this).remove();
+                       }) ;
+                });
+                                    
             </script>
-
 
             <!-- Bootstrap Core JavaScript -->
             <script src="js/bootstrap.min.js"></script>
