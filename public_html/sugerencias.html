@@ -8,6 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script type="text/javascript" src= "js/jquery-ui-1.10.3.custom.min.js"></script>
 
         <title>Instafood | Sugerencias</title>
 
@@ -189,7 +191,7 @@
                     <div class="row">
                         <div class="col-lg-6">
 
-                            <form role="form">
+                            <form role="form" id="formaIng">
 
                                 <div class="form-group">
                                     <label>Incluir ingredientes</label>
@@ -198,16 +200,11 @@
 
                                 <div class="form-group">
                                     <label>Lista de ingredientes</label>
-                                    <select multiple class="form-control">
-                                        <option>Ingrediente 1</option>
-                                        <option>Ingrediente 2</option>
-                                        <option>Ingrediente 3</option>
-                                        <option>Ingrediente 4</option>
-                                        <option>Ingrediente 5</option>
+                                    <select multiple class="form-control" id="listaIncluidos">                                                                                
                                     </select>
                                 </div>
 
-                                <button type="button" class="btn btn-danger">Quitar</button>
+                                <button type="button" class="btn btn-danger" id="quitarInc">Quitar</button>
                                 <button type="button" class="btn btn-primary">Buscar recetas</button>                               
 
                             </form>
@@ -222,16 +219,11 @@
 
                             <div class="form-group">
                                 <label>Ingredientes excluidos</label>
-                                <select multiple class="form-control">
-                                    <option>Ingrediente 1</option>
-                                    <option>Ingrediente 2</option>
-                                    <option>Ingrediente 3</option>
-                                    <option>Ingrediente 4</option>
-                                    <option>Ingrediente 5</option>
+                                <select multiple class="form-control" id="listaExcl">                                    
                                 </select>
                             </div>
 
-                            <button type="button" class="btn btn-danger">Quitar</button>
+                            <button type="button" class="btn btn-danger" id="quitarExc">Quitar</button>
                         </div>
                     </div>
                     <!-- /.row -->
@@ -270,7 +262,41 @@
             <!-- /#wrapper -->
 
             <!-- jQuery -->
-            <script src="js/jquery.js"></script>
+            <script src="js/jquery.js">
+
+            </script>
+
+            <script>
+                $('#formaIng').submit(function (e){
+                   e.preventDefault(); 
+                });
+                                    
+                var n = document.getElementById("incluir");
+                $(n).keypress(function (e) {
+                    if (e.which == 13) {
+                        $('#listaIncluidos').append('<option>' + n.value + '</option>');                   
+                        n.value='';
+                    }
+                });                
+                var m = document.getElementById("excluir");
+                $(m).keypress(function (e) {
+                    if (e.which == 13) {
+                        $('#listaExcl').append('<option>' + m.value + '</option>');
+                        m.value='';
+                    }
+                });                
+                $("#quitarInc").click(function(){
+                   $("#listaIncluidos option:selected").each(function(index,element){
+                           $(this).remove();
+                       }) ;
+                });
+                $("#quitarExc").click(function(){
+                   $("#listaExcl option:selected").each(function(index,element){
+                           $(this).remove();
+                       }) ;
+                });
+                                    
+            </script>
 
             <!-- Bootstrap Core JavaScript -->
             <script src="js/bootstrap.min.js"></script>
