@@ -162,24 +162,65 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
 
-                            <form name="basicform" id="basicform" method="post" action="yourpage.html">
+                            <form name="basicform" id="basicform" method="post" action="#">
 
                                 <!-- id will be unique, but class name will be same -->
                                 <div id="sf1" class="frm">
 
                                     <fieldset>
-                                        <legend>Step 1 of 3</legend>
+                                        <legend>Step 1 of 3 | Selecciona tus ingredientes</legend>
 
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="uname">Your Name: </label>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-12">
+                                                <label>Nombre de la receta:</label>
                                                 <input type="text" placeholder="Your Name" id="uname" name="uname" class="form-control" autocomplete="off" >
+                                                <br />
+                                            </div>
+                                            <div class="col-lg-5">
+
+                                                <select class="form-control" name="allIngredients" multiple size="10">
+                                                    <option>Ingrediente 1</option>
+                                                    <option>Ingrediente 2</option>
+                                                    <option>Ingrediente 3</option>
+                                                    <option>Ingrediente 4</option>
+                                                    <option>Ingrediente 5</option>
+                                                    <option>Ingrediente 6</option>
+                                                    <option>Ingrediente 7</option>
+                                                    <option>Ingrediente 8</option>
+                                                    <option>Ingrediente 9</option>
+                                                    <option>Ingrediente 10</option>
+                                                    <option>Ingrediente 11</option>
+                                                    <option>Ingrediente 12</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <center>
+                                                    <button class="btn btn-success">>> Añadir</button><br /><br />
+                                                    <button class="btn btn-danger">Quitar <<</button>
+                                                </center>                                                
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <select class="form-control" name="allIngredients" multiple size="10">
+                                                    <option>Ingrediente 1</option>
+                                                    <option>Ingrediente 2</option>
+                                                    <option>Ingrediente 3</option>
+                                                    <option>Ingrediente 4</option>
+                                                    <option>Ingrediente 5</option>
+                                                    <option>Ingrediente 6</option>
+                                                    <option>Ingrediente 7</option>
+                                                    <option>Ingrediente 8</option>
+                                                    <option>Ingrediente 9</option>
+                                                    <option>Ingrediente 10</option>
+                                                    <option>Ingrediente 11</option>
+                                                    <option>Ingrediente 12</option>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-lg-10 col-lg-offset-2">
                                                 <!-- open1 is given in the class that is binded with the click event -->
+                                                <br />
                                                 <button class="btn btn-primary open1" type="button">Next <span class="fa fa-arrow-right"></span></button> 
                                             </div>
                                         </div>
@@ -191,12 +232,15 @@
                                 <div id="sf2" class="frm">
 
                                     <fieldset>
-                                        <legend>Step 2 of 3</legend>
+                                        <legend>Step 2 of 3 | Ingresa los pasos</legend>
 
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="uemail">Your Email: </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" placeholder="Your Email" id="uemail" name="uemail" class="form-control" autocomplete="off">
+                                            <label class="col-lg-12 control-label" for="uemail">Procedimiento: </label>
+                                            <div class="col-lg-8">
+                                                <textarea class="form-control"></textarea>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input type="file" name="pasoImg" />
                                             </div>
                                         </div>
 
@@ -217,7 +261,7 @@
                                 <div id="sf3" class="frm">
 
                                     <fieldset>
-                                        <legend>Step 3 of 3</legend>
+                                        <legend>Step 3 of 3 | Descripción y confirmación</legend>
 
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label" for="upass1">Password: </label>
@@ -305,6 +349,13 @@
                     return false;
                 });
 
+                //Multiple select without ctrl
+                $('option').mousedown(function (e) {
+                    e.preventDefault();
+                    $(this).prop('selected', !$(this).prop('selected'));
+                    return false;
+                });
+
             });
         </script>
         <!-- Morris Charts JavaScript -->
@@ -314,10 +365,6 @@
         <script src="js/plugins/jquery-validation/Gruntfile.js"></script>
         <script src="js/plugins/jquery-steps/jquery.steps.js"></script>
         <script src="js/plugins/jquery-steps/jquery.steps.min.js"></script>        
-
-
-
-
 
     </body>
 
