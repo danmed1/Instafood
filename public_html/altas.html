@@ -282,7 +282,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                            </form><br />.
+                            </form>
                         </div>                                                
                     </div>
                     <!-- /.row -->
@@ -332,7 +332,7 @@
                     });
 
                     jQuery.each(arrayProcedures, function (i, val) {
-                        $("#proceduresCon").append('<tr><td>'+(i+1)+'</td><td>' + val + '</td><td>'+arrayImages[i]+'</td></tr>');
+                        $("#proceduresCon").append('<tr><td>' + (i + 1) + '</td><td>' + val + '</td></tr>');
                     });
                     /*
                      $("#addedIngredients option").each(function (index, element) {
@@ -392,17 +392,16 @@
                     if ($('#procedure').val()) {
                         arrayProcedures.push($('#procedure').val());
                         $('#procedure').val('');
-                        if ($('#proImg').val()) {
-                            arrayImages.push($('#proImg').val());
-                            $('#proImg').val('');
-                        } else {
-                            arrayImages.push('');
-                        }
+                        //if ($('#proImg').val()) {
+                        //arrayImages.push($('#proImg').val());
+                        //$('#proImg').val('');
+                        //} else {
+                        //arrayImages.push('');
+                        //}
 
                     } else {
                         alert('campo vacio');
                     }
-                    alert(arrayProcedures.length + '-' + arrayImages.length);
                 });
 
                 //Multiple select without ctrl
@@ -410,7 +409,7 @@
                     e.preventDefault();
                     $(this).prop('selected', !$(this).prop('selected'));
                     return false;
-                });
+                });                
             });
         </script>
         <!-- Morris Charts JavaScript -->
