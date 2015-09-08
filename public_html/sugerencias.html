@@ -205,7 +205,7 @@
                                 </div>
 
                                 <button type="button" class="btn btn-danger" id="quitarInc">Quitar</button>
-                                <button type="button" class="btn btn-primary">Buscar recetas</button>                               
+                                <button type="button" class="btn btn-primary" id="buscarRecetas">Buscar recetas</button>                               
 
                             </form>
 
@@ -233,7 +233,7 @@
                             <div class="page-header">
                                 <h1>Recetas encontradas</h1>
                             </div>
-                            <div class="col-lg-4">             
+                            <!--<div class="col-lg-4">             
                                 <img class="img-thumbnail" src="img/food1.jpg" alt="">                                
                             </div>
                             <div class="col-lg-4">                                             
@@ -250,7 +250,9 @@
                             </div>
                             <div class="col-lg-4">             
                                 <img class="img-thumbnail" src="img/food6.jpg" alt="">                            
-                            </div>
+                            </div>-->
+
+                            <div id="id01"></div>
                         </div>
                     </div>
                     <!-- /.container-fluid -->
@@ -267,35 +269,80 @@
             </script>
 
             <script>
-                $('#formaIng').submit(function (e){
-                   e.preventDefault(); 
+                $('#formaIng').submit(function (e) {
+                    e.preventDefault();
                 });
-                                    
-                var n = document.getElementById("incluir");
+
+                var n = document.getElementById("incluir");                
                 $(n).keypress(function (e) {
                     if (e.which == 13) {
-                        $('#listaIncluidos').append('<option>' + n.value + '</option>');                   
-                        n.value='';
+                        $('#listaIncluidos').append('<option>' + n.value + '</option>');                        
+                        n.value = '';
                     }
-                });                
+                });
                 var m = document.getElementById("excluir");
                 $(m).keypress(function (e) {
                     if (e.which == 13) {
                         $('#listaExcl').append('<option>' + m.value + '</option>');
-                        m.value='';
+                        m.value = '';
                     }
-                });                
-                $("#quitarInc").click(function(){
-                   $("#listaIncluidos option:selected").each(function(index,element){
-                           $(this).remove();
-                       }) ;
                 });
-                $("#quitarExc").click(function(){
-                   $("#listaExcl option:selected").each(function(index,element){
-                           $(this).remove();
-                       }) ;
+                $("#quitarInc").click(function () {
+                    $("#listaIncluidos option:selected").each(function (index, element) {
+                        $(this).remove();
+                    });
                 });
-                                    
+                $("#quitarExc").click(function () {
+                    $("#listaExcl option:selected").each(function (index, element) {
+                        $(this).remove();
+                    });
+                });
+            </script>
+
+            <script>
+                $('#buscarRecetas').click(function () {
+                    var xmlhttp = new XMLHttpRequest();
+                    //var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
+                    var url = "json/recetas.json";
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            myFunction(xmlhttp.responseText);
+                        }
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+
+                    function myFunction(response) {
+                        var arr = JSON.parse(response);
+                        var i;
+                        var j;
+                        var out = "<table>";
+
+                        for (i = 0; i < arr.length; i++) {
+                            var n = arr[i].ingredientes.length;
+                            out += "</td><td>" +
+                                    arr[i].nombre;
+                            for (j = 0; j < n; j++) {
+                                /*
+                                 if ((arr[i].ingredientes[j].ing.nombre) == 'Cebolla') {
+                                 out += "</td><td>" +
+                                 arr[i].ingredientes[j].ing.nombre;                         
+                                 }
+                                */
+                               
+                                out += "</td><td>" +
+                                        arr[i].ingredientes[j].ing.nombre;                                                                
+                            }
+                            "</td></tr>";
+                        }
+
+                        out += "</table>";
+                        document.getElementById("id01").innerHTML = out;                        
+                        //alert(document.getElementById'listaIncluidos').value;
+                    }
+                });
+
             </script>
 
             <!-- Bootstrap Core JavaScript -->
