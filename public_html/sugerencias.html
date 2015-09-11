@@ -205,7 +205,7 @@
                                 </div>
 
                                 <button type="button" class="btn btn-danger" id="quitarInc">Quitar</button>
-                                <button type="button" class="btn btn-primary" id="buscarRecetas">Buscar recetas</button>                               
+                                <button type="button" class="btn btn-primary" id="buscarRecetas">Buscar recetas</button>                                                  
 
                             </form>
 
@@ -273,10 +273,13 @@
                     e.preventDefault();
                 });
 
-                var n = document.getElementById("incluir");                
+                var n = document.getElementById("incluir");
+                var arrIngredientesIncluidos = [];
+                var arrIngredientesExcluidos = [];
                 $(n).keypress(function (e) {
                     if (e.which == 13) {
-                        $('#listaIncluidos').append('<option>' + n.value + '</option>');                        
+                        $('#listaIncluidos').append('<option>' + n.value + '</option>');
+                        arrIngredientesIncluidos.push(n.value);
                         n.value = '';
                     }
                 });
@@ -284,6 +287,7 @@
                 $(m).keypress(function (e) {
                     if (e.which == 13) {
                         $('#listaExcl').append('<option>' + m.value + '</option>');
+                        arrIngredientesExcluidos.push(m.value);
                         m.value = '';
                     }
                 });
@@ -297,14 +301,12 @@
                         $(this).remove();
                     });
                 });
-            </script>
 
-            <script>
                 $('#buscarRecetas').click(function () {
+                    document.getElementById("id01").innerHTML = '';
                     var xmlhttp = new XMLHttpRequest();
                     //var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
                     var url = "json/recetas.json";
-
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             myFunction(xmlhttp.responseText);
@@ -312,36 +314,39 @@
                     }
                     xmlhttp.open("GET", url, true);
                     xmlhttp.send();
-
                     function myFunction(response) {
                         var arr = JSON.parse(response);
                         var i;
                         var j;
+                        var k;
                         var out = "<table>";
-
+                        var sizeIngIncl = arrIngredientesIncluidos.length;
+                        var sizeIngExcl = arrIngredientesExcluidos.length;                        
                         for (i = 0; i < arr.length; i++) {
                             var n = arr[i].ingredientes.length;
-                            out += "</td><td>" +
-                                    arr[i].nombre;
+                            /*out += "</td><td>" +
+                             arr[i].nombre;*/
                             for (j = 0; j < n; j++) {
+                                for (k = 0; k < sizeIngIncl; k++) {
+                                    if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesIncluidos[k]) {
+                                        out +="</td><td>" +
+                                                arr[i].nombre ;
+                                                /*"</td><td>" +
+                                                arr[i].ingredientes[j].ing.nombre;*/
+                                    }
+                                }
+
                                 /*
-                                 if ((arr[i].ingredientes[j].ing.nombre) == 'Cebolla') {
                                  out += "</td><td>" +
-                                 arr[i].ingredientes[j].ing.nombre;                         
-                                 }
-                                */
-                               
-                                out += "</td><td>" +
-                                        arr[i].ingredientes[j].ing.nombre;                                                                
+                                 arr[i].ingredientes[j].ing.nombre;
+                                 */
                             }
                             "</td></tr>";
                         }
-
                         out += "</table>";
-                        document.getElementById("id01").innerHTML = out;                        
-                        //alert(document.getElementById'listaIncluidos').value;
-                    }
-                });
+                        document.getElementById("id01").innerHTML = out;
+                    }                    
+                });                
 
             </script>
 
