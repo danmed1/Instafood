@@ -214,11 +214,13 @@
 
                                         <div class="form-group">
                                             <label class="col-lg-12 control-label" for="uemail">Procedimiento: </label>
+                                            <div class="col-lg-12">
+                                                <div id="proceds"></div>
+                                            </div>
                                             <div class="col-lg-8">
                                                 <textarea class="form-control" id="procedure"></textarea>
                                             </div>
                                             <div class="col-lg-4">
-                                                <input type="file" id="proImg" /><br />
                                                 <button class="btn btn-info" id="addProcedure" type="button"> Añade Procedimiento</button>
                                             </div>
                                         </div>
@@ -263,7 +265,7 @@
                                         <div class="form-group">
                                             <div class="col-lg-9">
                                                 <h4>Procedimientos:</h4>
-                                                <table id="proceduresCon"></table>
+                                                <ol id="proceduresCon"></ol>
                                             </div>
                                             <div class="col-lg-3">
 
@@ -332,7 +334,7 @@
                     });
 
                     jQuery.each(arrayProcedures, function (i, val) {
-                        $("#proceduresCon").append('<tr><td>' + (i + 1) + '</td><td>' + val + '</td></tr>');
+                        $("#proceduresCon").append('<li>' + val + '</li>');
                     });
                     /*
                      $("#addedIngredients option").each(function (index, element) {
@@ -391,14 +393,19 @@
                 $('#addProcedure').click(function () {
                     if ($('#procedure').val()) {
                         arrayProcedures.push($('#procedure').val());
-                        $('#procedure').val('');
-                        //if ($('#proImg').val()) {
-                        //arrayImages.push($('#proImg').val());
-                        //$('#proImg').val('');
-                        //} else {
-                        //arrayImages.push('');
-                        //}
+                        var arrL = arrayProcedures.length;
+                        $('#proceds').append('<div class="row" id="div' + arrL + '">\n\
+                            <div class="col-lg-1"><button type="button" id="b' + arrL + '" \n\
+                            class="btn btn-default remueveP">X</button></div><div class="col-lg-11">\n\
+                            <p>' + $('#procedure').val() + '</p></div><hr></div>');
 
+                        $('.remueveP').click(function () {
+
+                            var num = $(this).attr('id');
+                            alert(num);
+                        });
+
+                        $('#procedure').val('');
                     } else {
                         alert('campo vacio');
                     }
@@ -409,9 +416,10 @@
                     e.preventDefault();
                     $(this).prop('selected', !$(this).prop('selected'));
                     return false;
-                });                
+                });
             });
         </script>
+
         <!-- Morris Charts JavaScript -->
         <script src="js/plugins/morris/raphael.min.js"></script>
         <script src="js/plugins/morris/morris.min.js"></script>
