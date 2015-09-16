@@ -5,6 +5,7 @@
         "porciones": 10,
         "tiempoPrep": 20,
         "fechaCrecion": "sep 1, 2015",
+        "tipo":"snack",
         "ingredientes": [{
                 "ing": {
                     "nombre": "Filete de Res",
@@ -47,6 +48,7 @@
         "descripcion": "Deliciosas hamburguesas de res para asar",
         "porciones": 10,
         "tiempoPrep": 20,
+        "tipo":"comida",
         "fechaCrecion": "sep 1, 2015",
         "ingredientes": [{
                 "ing": {
