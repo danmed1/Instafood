@@ -202,85 +202,9 @@
                     <!-- /.row -->
 
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading panel-food" id="pDes">
-                                    <div class="row">
-                                        <div class="col-xs-3">                                            
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge">26</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">Desayunos</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-green">
-                                <div class="panel-heading panel-food">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge">12</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">Comidas</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-yellow">
-                                <div class="panel-heading panel-food">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge">124</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">Cenas</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-red">
-                                <div class="panel-heading panel-food">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge">13</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">Snacks</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
+
+                        <div class="col-lg-12" id="recetas">
+
                         </div>
                     </div>
                     <!-- /.row -->
@@ -361,18 +285,47 @@
 
         <script>
             $(document).ready(function () {
-                var arrDes = ['food3.jpg', 'food4.jpg', 'food5.jpg', 'food6.jpg'];
-                var i = 3;
-                window.setInterval(function () {
-                    if (i < 7) {
-                        $('#pDes').css('background-image','img/'+ arrDes.get(i - 3));
-                    } else {
-                        i = 3;
-                        $('#pDes').css('background-image','img/'+ arrDes.get(i - 3));
+                var arrayRecipes = [];
+                getJSON("recetas");
+                //Lectura JSON
+                function getJSON(type) {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "json/" + type + ".json";
+                    //var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            myFunction(xmlhttp.responseText, type);
+                        }
                     }
-                    i++;
-                }, 5000);
-                
+                    function myFunction(response, type) {
+                        if (type === "recetas") {
+                            arrayRecipes = JSON.parse(response);
+
+                            var i;
+                            for (i = 0; i < arrayRecipes.length; i++) {
+                              $("#recetas").append('<div class="col-lg-3 col-md-6">\n\
+                                                        <div class="panel panel-red">\n\
+                                                            <a href="#">\n\
+                                                            <div class="panel-heading panel-food">\n\
+                                                                <img src="img/desayunos/'+arrayRecipes[i].image+'" />\n\
+                                                                <div class="row">\n\
+                                                                    <div class="col-xs-3"></div>\n\
+                                                                    <div class="col-xs-9 text-right">\n\
+                                                                    <div class="med">'+arrayRecipes[i].nombre+'</div>\
+                                                                    </div>\n\
+                                                                </div>\n\
+                                                            </div>\n\
+                                                            </a>\n\
+                                                        </div>\n\
+                                                    </div>');
+                            }
+                        }
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                }
+
+
             });
         </script>
         <!-- Morris Charts JavaScript -->
