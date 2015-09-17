@@ -322,37 +322,78 @@
                     function myFunction(response) {
                         var arr = JSON.parse(response);
                         var i, j, k;
-                        var out = "<table>";
+                        var out = "<table><tr><td>";
                         var recetasEncontradas = [];
                         var recetasExcluidas = [];
                         var sizeIngIncl = arrIngredientesIncluidos.length;
-                        var sizeIngExcl = arrIngredientesExcluidos.length;
+                        var sizeIngExcl = arrIngredientesExcluidos.length;                                                
+                        //LLENA LOS ARREGLOS CON LAS COINCIDENCIAS DE RECETAS E INGREDIENTES                        
                         for (i = 0; i < arr.length; i++) {
                             var n = arr[i].ingredientes.length;
-                            
                             for (j = 0; j < n; j++) {
-                                for (k = 0; k < sizeIngIncl; k++) {
-                                    if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesExcluidos[k]) {
-                                        recetasExcluidas[i] = arr[i].nombre;
-                                    }
+                                for (k = 0; k < sizeIngIncl; k++) {                                    
                                     if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesIncluidos[k]) {
-                                        recetasEncontradas[i] = arr[i].nombre;                                                                               
+                                        recetasEncontradas.push(arr[i].nombre);                                                                                
                                     }
                                 }
-
+                                for (k = 0; k < sizeIngExcl; k++) {                                    
+                                    if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesExcluidos[k]) {
+                                        recetasExcluidas.push(arr[i].nombre);
+                                    }
+                                }
                             }
-                            "</td></tr>";
+                        }                                                     
+                        //ELIMINA REPETICIONES
+                        var auxRecetas = recetasEncontradas;                        
+                        var recetasRepetidas = false;
+                        do {
+                            for (i = 0; i < recetasEncontradas.length; i++) {
+                                for (j = (i+1); j <= auxRecetas.length; j++) {
+                                    if (recetasEncontradas[i] == auxRecetas[j]) {
+                                        auxRecetas.splice(j, 1);
+                                        recetasRepetidas=true;                                        
+                                    }
+                                    else{
+                                        recetasRepetidas=false;
+                                    }
+                                }
+                            }
                         }
-                        for (i = 0; i < recetasEncontradas.length; i++) {
+                        while (recetasRepetidas);
+                        recetasEncontradas=auxRecetas;
+                        
+                        auxRecetas = recetasExcluidas;                        
+                        recetasRepetidas = false;
+                        do {
+                            for (i = 0; i < recetasExcluidas.length; i++) {
+                                for (j = (i+1); j <= auxRecetas.length; j++) {
+                                    if (recetasExcluidas[i] == auxRecetas[j]) {
+                                        auxRecetas.splice(j, 1);
+                                        recetasRepetidas=true;                                        
+                                    }
+                                    else{
+                                        recetasRepetidas=false;
+                                    }
+                                }
+                            }
+                        }
+                        while (recetasRepetidas);
+                        recetasExcluidas=auxRecetas;                                                                        
+
+                        //ELIMINA LAS RECETAS ENCONTRADAS QUE INCLUYEN INGREDIENTES EXCLUIDOS
+                        for (i = 0; i <= recetasEncontradas.length; i++) {
                             for (j = 0; j <= recetasExcluidas.length; j++) {
                                 if (recetasEncontradas[i] == recetasExcluidas[j]) {
                                     recetasEncontradas.splice(i, 1);
                                 }
                             }
                         }
+                    
+
+                        //ESCRIBE TODAS LAS RECETAS QUE ENCUETRA
                         for (i = 0; i < recetasEncontradas.length; i++) {
-                            out += "</td><td>" +
-                                recetasEncontradas[i];
+                            out += "</td></tr></tr><td>" +
+                                    recetasEncontradas[i];
                         }
                         out += "</table>";
                         document.getElementById("id01").innerHTML = out;
@@ -363,7 +404,5 @@
 
             <!-- Bootstrap Core JavaScript -->
             <script src="js/bootstrap.min.js"></script>
-
     </body>
-
 </html>
