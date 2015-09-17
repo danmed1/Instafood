@@ -320,7 +320,6 @@
 
                 var arrayAll = [];
                 var arrayProcedures = [];
-                var arrayImages = [];
                 var arrayRecipes = [];
                 getJSON("recetas");
                 getJSON("ingredientes");
@@ -436,11 +435,17 @@
                     }
                 });
 
+                function optionExists(sel,val) {
+                    return $(sel+" option[value='" + val + "']").length !== 0;
+                }
+
                 //Paso 1: Anadir y remover de las listas              
                 $('#anade').click(function () {
-                    $("#addedIngredients").empty();
+                    //$("#addedIngredients").empty();
                     $("#allIngredients option:selected").each(function (index, element) {
-                        $("#addedIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
+                        if (!optionExists("#addedIngredients",element.value)) {
+                            $("#addedIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
+                        }
                     });
                     $("option:selected").removeAttr("selected");
                     //AÑADIR SCRIPT MULTIPLE SELECT
