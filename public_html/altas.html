@@ -244,7 +244,17 @@
                                         <div class="form-group">
                                             <div class="col-lg-6">
                                                 <h4>Ingredientes:</h4>
-                                                <ul id="ingredientsCon"></ul>
+                                                <table id="ingredientsCon">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>Ingrediente</td>
+                                                            <td>Cantidad</td>
+                                                            <td>Unidad</td>
+                                                        </tr>
+
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label>Descripción:</label>
@@ -259,12 +269,18 @@
                                         </div><br />
 
                                         <div class="form-group">
-                                            <div class="col-lg-9">
+                                            <div class="col-lg-6">
                                                 <h4>Procedimientos:</h4>
                                                 <ol id="proceduresCon"></ol>
                                             </div>
-                                            <div class="col-lg-3">
-
+                                            <div class="col-lg-6">
+                                                <label>Tipo de alimento:</label>
+                                                <select id="tipoCon" class="form-control">
+                                                    <option value="desayuno">desayuno</option>
+                                                    <option value="comida">comida</option>
+                                                    <option value="cena">cena</option>
+                                                    <option value="snack">snack</option>
+                                                </select>
                                             </div>
                                         </div><br />
 
@@ -360,7 +376,13 @@
                         $("#nombreCon").val($("#recipeName").val());
                         $("#ingredientsCon").empty();
                         $("#addedIngredients option").each(function (index, element) {
-                            $("#ingredientsCon").append("<li>" + element.text + "</li>");
+                            $("#ingredientsCon").append("<tr><td>" + element.text + "</td>\n\
+                            <td><input class=\"form-control\" type=\"text\" id=\"can" + index + "\" /></td>\n\
+                            <td><select class=\"form-control\" id=\"uni" + index + "\">\n\
+                                    <option value=\"kg\">kg</option>\n\
+                                    <option value=\"g\">g</option>\n\
+                                    <option value=\"lt\">lt</option>\n\
+                                </select></td></tr>");
                         });
 
                         jQuery.each(arrayProcedures, function (i, val) {
@@ -458,7 +480,7 @@
                 });
 
                 //Multiple select without ctrl AÑADIR
-                
+
 
                 $("#porcionesCon").keypress(function (e) {
                     //if the letter is not digit then display error and don't type anything

@@ -55,6 +55,226 @@
             }]
     }, {
         "id": 1,
+        "nombre": "Hamburguesa48",
+        "descripcion": "Deliciosas hamburguesas de res para asar",
+        "porciones": 10,
+        "tiempoPrep": 20,
+        "tipo": "comida",
+        "image": "food4.jpg",
+        "fechaCrecion": "sep 1, 2015",
+        "ingredientes": [{
+                "ing": {
+                    "nombre": "Filete de Res",
+                    "id": 1
+                },
+                "unidad": "kg",
+                "cantidad": 1.0
+            }, {
+                "ing": {
+                    "nombre": "Lechuga",
+                    "id": 5
+                },
+                "unidad": "gr",
+                "cantidad": 300.0
+            }, {
+                "ing": {
+                    "nombre": "Pimiento",
+                    "id": 6
+                },
+                "unidad": "pz",
+                "cantidad": 4.0
+            }, {
+                "ing": {
+                    "nombre": "Jitomate",
+                    "id": 7
+                },
+                "unidad": "pz",
+                "cantidad": 3.0
+            }, {
+                "ing": {
+                    "nombre": "Cebolla",
+                    "id": 8
+                },
+                "unidad": "pz",
+                "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }]    
+    },{
+        "id": 2,
+        "nombre": "Brocheta2",
+        "descripcion": "Deliciosas brochetas de res para asar",
+        "porciones": 10,
+        "tiempoPrep": 20,
+        "fechaCrecion": "sep 1, 2015",
+        "tipo": "cena",
+        "image": "food3.jpg",
+        "ingredientes": [{
+                "ing": {
+                    "nombre": "Filete de Res",
+                    "id": 1
+                },
+                "unidad": "kg",
+                "cantidad": 1.0
+            }, {
+                "ing": {
+                    "nombre": "Tocino ahumado",
+                    "id": 5
+                },
+                "unidad": "gr",
+                "cantidad": 300.0
+            }, {
+                "ing": {
+                    "nombre": "Pimiento",
+                    "id": 6
+                },
+                "unidad": "pz",
+                "cantidad": 4.0
+            }, {
+                "ing": {
+                    "nombre": "Jitomate",
+                    "id": 7
+                },
+                "unidad": "pz",
+                "cantidad": 3.0
+            }, {
+                "ing": {
+                    "nombre": "Cebolla",
+                    "id": 8
+                },
+                "unidad": "pz",
+                "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }]
+    }, {
+        "id": 3,
+        "nombre": "Hamburguesa 2",
+        "descripcion": "Deliciosas hamburguesas de res para asar",
+        "porciones": 10,
+        "tiempoPrep": 20,
+        "tipo": "snack",
+        "image": "food4.jpg",
+        "fechaCrecion": "sep 1, 2015",
+        "ingredientes": [{
+                "ing": {
+                    "nombre": "Filete de Res",
+                    "id": 1
+                },
+                "unidad": "kg",
+                "cantidad": 1.0
+            }, {
+                "ing": {
+                    "nombre": "Lechuga",
+                    "id": 5
+                },
+                "unidad": "gr",
+                "cantidad": 300.0
+            }, {
+                "ing": {
+                    "nombre": "Pimiento",
+                    "id": 6
+                },
+                "unidad": "pz",
+                "cantidad": 4.0
+            }, {
+                "ing": {
+                    "nombre": "Jitomate",
+                    "id": 7
+                },
+                "unidad": "pz",
+                "cantidad": 3.0
+            }, {
+                "ing": {
+                    "nombre": "Cebolla",
+                    "id": 8
+                },
+                "unidad": "pz",
+                "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }]    
+    },{
+        "id": 4,
+        "nombre": "Brocheta 3",
+        "descripcion": "Deliciosas brochetas de res para asar",
+        "porciones": 10,
+        "tiempoPrep": 20,
+        "fechaCrecion": "sep 1, 2015",
+        "tipo": "desayuno",
+        "image": "food3.jpg",
+        "ingredientes": [{
+                "ing": {
+                    "nombre": "Filete de Res",
+                    "id": 1
+                },
+                "unidad": "kg",
+                "cantidad": 1.0
+            }, {
+                "ing": {
+                    "nombre": "Tocino ahumado",
+                    "id": 5
+                },
+                "unidad": "gr",
+                "cantidad": 300.0
+            }, {
+                "ing": {
+                    "nombre": "Pimiento",
+                    "id": 6
+                },
+                "unidad": "pz",
+                "cantidad": 4.0
+            }, {
+                "ing": {
+                    "nombre": "Jitomate",
+                    "id": 7
+                },
+                "unidad": "pz",
+                "cantidad": 3.0
+            }, {
+                "ing": {
+                    "nombre": "Cebolla",
+                    "id": 8
+                },
+                "unidad": "pz",
+                "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }]
+    }, {
+        "id": 5,
         "nombre": "Hamburguesa",
         "descripcion": "Deliciosas hamburguesas de res para asar",
         "porciones": 10,
@@ -97,6 +317,126 @@
                 },
                 "unidad": "pz",
                 "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }]    
+    },{
+        "id": 6,
+        "nombre": "Brocheta22",
+        "descripcion": "Deliciosas brochetas de res para asar",
+        "porciones": 10,
+        "tiempoPrep": 20,
+        "fechaCrecion": "sep 1, 2015",
+        "tipo": "cena",
+        "image": "food3.jpg",
+        "ingredientes": [{
+                "ing": {
+                    "nombre": "Filete de Res",
+                    "id": 1
+                },
+                "unidad": "kg",
+                "cantidad": 1.0
+            }, {
+                "ing": {
+                    "nombre": "Tocino ahumado",
+                    "id": 5
+                },
+                "unidad": "gr",
+                "cantidad": 300.0
+            }, {
+                "ing": {
+                    "nombre": "Pimiento",
+                    "id": 6
+                },
+                "unidad": "pz",
+                "cantidad": 4.0
+            }, {
+                "ing": {
+                    "nombre": "Jitomate",
+                    "id": 7
+                },
+                "unidad": "pz",
+                "cantidad": 3.0
+            }, {
+                "ing": {
+                    "nombre": "Cebolla",
+                    "id": 8
+                },
+                "unidad": "pz",
+                "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }]
+    }, {
+        "id": 7,
+        "nombre": "Hamburguesa 33",
+        "descripcion": "Deliciosas hamburguesas de res para asar",
+        "porciones": 10,
+        "tiempoPrep": 20,
+        "tipo": "snack",
+        "image": "food4.jpg",
+        "fechaCrecion": "sep 1, 2015",
+        "ingredientes": [{
+                "ing": {
+                    "nombre": "Filete de Res",
+                    "id": 1
+                },
+                "unidad": "kg",
+                "cantidad": 1.0
+            }, {
+                "ing": {
+                    "nombre": "Lechuga",
+                    "id": 5
+                },
+                "unidad": "gr",
+                "cantidad": 300.0
+            }, {
+                "ing": {
+                    "nombre": "Pimiento",
+                    "id": 6
+                },
+                "unidad": "pz",
+                "cantidad": 4.0
+            }, {
+                "ing": {
+                    "nombre": "Jitomate",
+                    "id": 7
+                },
+                "unidad": "pz",
+                "cantidad": 3.0
+            }, {
+                "ing": {
+                    "nombre": "Cebolla",
+                    "id": 8
+                },
+                "unidad": "pz",
+                "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
             }]    
     }]
 
