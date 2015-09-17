@@ -110,7 +110,7 @@
             }]
     }, {
         "id": 2,
-        "nombre": "Brocheta",
+        "nombre": "Brocheta 2",
         "descripcion": "Deliciosas brochetas de res para asar",
         "porciones": 10,
         "tiempoPrep": 20,
@@ -165,7 +165,7 @@
             }]
     }, {
         "id": 3,
-        "nombre": "Hamburguesa",
+        "nombre": "Hamburguesa 2",
         "descripcion": "Deliciosas hamburguesas de res para asar",
         "porciones": 10,
         "tiempoPrep": 20,
