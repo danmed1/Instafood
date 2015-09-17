@@ -6,7 +6,7 @@
         "tiempoPrep": 20,
         "fechaCrecion": "sep 1, 2015",
         "tipo": "desayuno",
-        "image": "food2.jpeg",
+        "image": "food1.jpg",
         "ingredientes": [{
                 "ing": {
                     "nombre": "Filete de Res",
@@ -60,7 +60,7 @@
         "porciones": 10,
         "tiempoPrep": 20,
         "tipo": "comida",
-        "image": "food4.jpg",
+        "image": "food2.jpg",
         "fechaCrecion": "sep 1, 2015",
         "ingredientes": [{
                 "ing": {
@@ -226,7 +226,7 @@
         "tiempoPrep": 20,
         "fechaCrecion": "sep 1, 2015",
         "tipo": "desayuno",
-        "image": "food3.jpg",
+        "image": "food5.jpg",
         "ingredientes": [{
                 "ing": {
                     "nombre": "Filete de Res",
@@ -280,7 +280,7 @@
         "porciones": 10,
         "tiempoPrep": 20,
         "tipo": "comida",
-        "image": "food3.jpg",
+        "image": "food6.jpg",
         "fechaCrecion": "sep 1, 2015",
         "ingredientes": [{
                 "ing": {
@@ -336,7 +336,7 @@
         "tiempoPrep": 20,
         "fechaCrecion": "sep 1, 2015",
         "tipo": "cena",
-        "image": "food3.jpg",
+        "image": "food7.jpg",
         "ingredientes": [{
                 "ing": {
                     "nombre": "Filete de Res",
@@ -390,7 +390,7 @@
         "porciones": 10,
         "tiempoPrep": 20,
         "tipo": "snack",
-        "image": "food4.jpg",
+        "image": "food8.jpg",
         "fechaCrecion": "sep 1, 2015",
         "ingredientes": [{
                 "ing": {
