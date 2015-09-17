@@ -14,7 +14,6 @@ $(document).ready(function () {
    $("#slideContainer").mouseout(function(){
        intervalId=window.setInterval(caroussel,3000);
    });
-   alert("si jala");
 });
 function caroussel() {
     var currentActive = $("#slide" + (i % slideNumber));
