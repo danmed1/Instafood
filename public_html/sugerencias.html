@@ -336,7 +336,7 @@
                                 for (k = 0; k < sizeIngIncl; k++) {                                    
                                     if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesIncluidos[k]) {
                                         recetasEncontradas.push(arr[i].image);
-                                        nombreEncontrados.push(arr[i].nombre);
+                                        nombreEncontrados.push(arr[i].id);
                                     }
                                 }
                                 for (k = 0; k < sizeIngExcl; k++) {                                    
@@ -402,7 +402,7 @@
 
                         //ESCRIBE TODAS LAS RECETAS QUE ENCUETRA
                         for (i = 0; i < recetasEncontradas.length; i++) {
-                            out += '<a href="recetas.html?nombreReceta='+nombreEncontrados[i]+'"><img src="img/'+recetasEncontradas[i]+'" /></a>  &nbsp;';
+                            out += '<a href="template-receta.html?id='+nombreEncontrados[i]+'"><img src="img/'+recetasEncontradas[i]+'" /></a>  &nbsp;';
                         }
                         out += "</table>";                        
                         document.getElementById("id01").innerHTML = out;
