@@ -5,8 +5,8 @@
         "porciones": 10,
         "tiempoPrep": 20,
         "fechaCrecion": "sep 1, 2015",
-        "tipo":"desayuno",
-        "image":"food3.jpg",
+        "tipo": "desayuno",
+        "image": "food3.jpg",
         "ingredientes": [{
                 "ing": {
                     "nombre": "Filete de Res",
@@ -42,6 +42,16 @@
                 },
                 "unidad": "pz",
                 "cantidad": 2.0
+            }],
+        "procedimiento": [{
+                "paso": 1,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            }, {
+                "paso": 2,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
+            },{
+                "paso": 3,
+                "pro": "Picar la cebolla y los tomates para que queden bien exquisitos, no olvidar ponerle pimiento y ajo, parra un mejor sazón"
             }]
     }, {
         "id": 1,
@@ -49,8 +59,8 @@
         "descripcion": "Deliciosas hamburguesas de res para asar",
         "porciones": 10,
         "tiempoPrep": 20,
-        "tipo":"comida",
-        "image":"food4.jpg",
+        "tipo": "comida",
+        "image": "food4.jpg",
         "fechaCrecion": "sep 1, 2015",
         "ingredientes": [{
                 "ing": {
