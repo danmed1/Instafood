@@ -303,21 +303,23 @@
 
                             var i;
                             for (i = 0; i < arrayRecipes.length; i++) {
-                              $("#recetas").append('<div class="col-lg-3 col-md-6">\n\
+                                if (arrayRecipes[i].tipo === "desayuno") {
+                                    $("#recetas").append('<div class="col-lg-3 col-md-6">\n\
                                                         <div class="panel panel-red">\n\
-                                                            <a href="template-receta.html?id='+arrayRecipes[i].id+'">\n\
+                                                            <a href="template-receta.html?id=' + arrayRecipes[i].id + '">\n\
                                                             <div class="panel-heading panel-food">\n\
-                                                                <img src="img/desayunos/'+arrayRecipes[i].image+'" />\n\
+                                                                <img src="img/desayunos/' + arrayRecipes[i].image + '" />\n\
                                                                 <div class="row">\n\
                                                                     <div class="col-xs-3"></div>\n\
                                                                     <div class="col-xs-9 text-right">\n\
-                                                                    <div class="med">'+arrayRecipes[i].nombre+'</div>\
+                                                                    <div class="med">' + arrayRecipes[i].nombre + '</div>\
                                                                     </div>\n\
                                                                 </div>\n\
                                                             </div>\n\
                                                             </a>\n\
                                                         </div>\n\
                                                     </div>');
+                                }
                             }
                         }
                     }
