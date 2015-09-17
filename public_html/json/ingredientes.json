@@ -6,7 +6,7 @@
                 "id": 3
             }]
     }, {
-        "nombre": "Pechiga de pollo",
+        "nombre": "Pechuga de pollo",
         "id": 1,
         "listaCats": [{
                 "nombre": "Ave",
@@ -54,4 +54,12 @@
                 "nombre": "Verdura",
                 "id": 2
             }]
-    }]
+    },{
+        "nombre": "Lechuga",
+        "id": 8,
+        "listaCats": [{
+                "nombre": "Verdura",
+                "id": 2
+            }]
+    }
+    ]

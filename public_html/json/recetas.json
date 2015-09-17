@@ -6,7 +6,7 @@
         "tiempoPrep": 20,
         "fechaCrecion": "sep 1, 2015",
         "tipo": "desayuno",
-        "image": "food3.jpg",
+        "image": "food2.jpeg",
         "ingredientes": [{
                 "ing": {
                     "nombre": "Filete de Res",
@@ -60,7 +60,7 @@
         "porciones": 10,
         "tiempoPrep": 20,
         "tipo": "comida",
-        "image": "food4.jpg",
+        "image": "food3.jpg",
         "fechaCrecion": "sep 1, 2015",
         "ingredientes": [{
                 "ing": {

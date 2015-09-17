@@ -252,7 +252,7 @@
                                 <img class="img-thumbnail" src="img/food6.jpg" alt="">                            
                             </div>-->
 
-                            <div id="id01"></div>
+                            <div id="id01"></div>                            
                         </div>
                     </div>
                     <!-- /.container-fluid -->
@@ -325,6 +325,8 @@
                         var out = "<table><tr><td>";
                         var recetasEncontradas = [];
                         var recetasExcluidas = [];
+                        var nombreEncontrados=[];
+                        var nombreExcluidos=[];
                         var sizeIngIncl = arrIngredientesIncluidos.length;
                         var sizeIngExcl = arrIngredientesExcluidos.length;                                                
                         //LLENA LOS ARREGLOS CON LAS COINCIDENCIAS DE RECETAS E INGREDIENTES                        
@@ -333,24 +335,28 @@
                             for (j = 0; j < n; j++) {
                                 for (k = 0; k < sizeIngIncl; k++) {                                    
                                     if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesIncluidos[k]) {
-                                        recetasEncontradas.push(arr[i].nombre);                                                                                
+                                        recetasEncontradas.push(arr[i].image);
+                                        nombreEncontrados.push(arr[i].nombre);
                                     }
                                 }
                                 for (k = 0; k < sizeIngExcl; k++) {                                    
                                     if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesExcluidos[k]) {
-                                        recetasExcluidas.push(arr[i].nombre);
+                                        recetasExcluidas.push(arr[i].image);
+                                        nombreExcluidos.push(arr[i].nombre);
                                     }
                                 }
                             }
                         }                                                     
                         //ELIMINA REPETICIONES
                         var auxRecetas = recetasEncontradas;                        
+                        var auxNombres= nombreEncontrados;
                         var recetasRepetidas = false;
                         do {
                             for (i = 0; i < recetasEncontradas.length; i++) {
                                 for (j = (i+1); j <= auxRecetas.length; j++) {
                                     if (recetasEncontradas[i] == auxRecetas[j]) {
                                         auxRecetas.splice(j, 1);
+                                        auxNombres.splice(j,1);
                                         recetasRepetidas=true;                                        
                                     }
                                     else{
@@ -361,14 +367,17 @@
                         }
                         while (recetasRepetidas);
                         recetasEncontradas=auxRecetas;
+                        nombreEncontrados=auxNombres;
                         
                         auxRecetas = recetasExcluidas;                        
+                        auxNombres= nombreExcluidos;
                         recetasRepetidas = false;
                         do {
                             for (i = 0; i < recetasExcluidas.length; i++) {
                                 for (j = (i+1); j <= auxRecetas.length; j++) {
                                     if (recetasExcluidas[i] == auxRecetas[j]) {
                                         auxRecetas.splice(j, 1);
+                                        auxNombres.splice(j, 1);
                                         recetasRepetidas=true;                                        
                                     }
                                     else{
@@ -378,24 +387,24 @@
                             }
                         }
                         while (recetasRepetidas);
-                        recetasExcluidas=auxRecetas;                                                                        
+                        recetasExcluidas=auxRecetas;
+                        nombreExcluidos=auxNombres;
 
                         //ELIMINA LAS RECETAS ENCONTRADAS QUE INCLUYEN INGREDIENTES EXCLUIDOS
                         for (i = 0; i <= recetasEncontradas.length; i++) {
                             for (j = 0; j <= recetasExcluidas.length; j++) {
                                 if (recetasEncontradas[i] == recetasExcluidas[j]) {
                                     recetasEncontradas.splice(i, 1);
+                                    nombreEncontrados.splice(i,1);
                                 }
                             }
-                        }
-                    
+                        }                        
 
                         //ESCRIBE TODAS LAS RECETAS QUE ENCUETRA
                         for (i = 0; i < recetasEncontradas.length; i++) {
-                            out += "</td></tr></tr><td>" +
-                                    recetasEncontradas[i];
+                            out += '<a href="recetas.html?nombreReceta='+nombreEncontrados[i]+'"><img src="img/'+recetasEncontradas[i]+'" /></a>  &nbsp;';
                         }
-                        out += "</table>";
+                        out += "</table>";                        
                         document.getElementById("id01").innerHTML = out;
                     }
                 });
