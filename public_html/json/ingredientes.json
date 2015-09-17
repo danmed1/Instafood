@@ -1,55 +1,55 @@
 [{
         "nombre": "Filete de Res",
-        "id": 1,
+        "id": 0,
         "listaCats": [{
                 "nombre": "Carne",
                 "id": 3
             }]
     }, {
         "nombre": "Pechiga de pollo",
-        "id": 2,
+        "id": 1,
         "listaCats": [{
                 "nombre": "Ave",
                 "id": 4
             }]
     }, {
         "nombre": "Espinaca",
-        "id": 3,
+        "id": 2,
         "listaCats": [{
                 "nombre": "Verdura",
                 "id": 2
             }]
     }, {
         "nombre": "Harina",
-        "id": 4,
+        "id": 3,
         "listaCats": [{
                 "nombre": "Misc",
                 "id": 6
             }]
     }, {
         "nombre": "Tocino ahumado",
-        "id": 5,
+        "id": 4,
         "listaCats": [{
                 "nombre": "Carne",
                 "id": 3
             }]
     }, {
         "nombre": "Pimiento",
-        "id": 6,
+        "id": 5,
         "listaCats": [{
                 "nombre": "Verdura",
                 "id": 2
             }]
     }, {
         "nombre": "Jitomate",
-        "id": 7,
+        "id": 6,
         "listaCats": [{
                 "nombre": "Verdura",
                 "id": 2
             }]
     }, {
         "nombre": "Cebolla",
-        "id": 8,
+        "id": 7,
         "listaCats": [{
                 "nombre": "Verdura",
                 "id": 2

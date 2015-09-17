@@ -139,22 +139,12 @@
 
                     <!-- Page Heading -->
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-12">
                             <h1 class="page-header">
-                                Escoge tu receta
+                                Añade tu receta
                             </h1>                            
                         </div>
-                        <div class="col-lg-3">
-                            <h1 class="page-header">
-                                <small>Busca tu receta</small>
-                            </h1>                            
-                        </div>
-                        <div class="col-lg-6 page-header">                            
-                            <div class="form-group input-group">
-                                <input type="text" class="form-control">
-                                <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
-                            </div>
-                        </div>
+
                     </div>
 
                     <!-- /.row -->
@@ -168,7 +158,7 @@
                                 <div id="sf1" class="frm">
 
                                     <fieldset>
-                                        <legend>Step 1 of 3 | Selecciona tus ingredientes</legend>
+                                        <legend>Paso 1 de 3 | Selecciona tus ingredientes</legend>
 
                                         <div class="form-group">
                                             <div class="col-lg-12">
@@ -210,15 +200,17 @@
                                 <div id="sf2" class="frm">
 
                                     <fieldset>
-                                        <legend>Step 2 of 3 | Ingresa los pasos</legend>
+                                        <legend>Paso 2 de 3 | Ingresa los pasos</legend>
 
                                         <div class="form-group">
                                             <label class="col-lg-12 control-label" for="uemail">Procedimiento: </label>
+                                            <div class="col-lg-12">
+                                                <div id="proceds"></div>
+                                            </div>
                                             <div class="col-lg-8">
                                                 <textarea class="form-control" id="procedure"></textarea>
                                             </div>
                                             <div class="col-lg-4">
-                                                <input type="file" id="proImg" /><br />
                                                 <button class="btn btn-info" id="addProcedure" type="button"> Añade Procedimiento</button>
                                             </div>
                                         </div>
@@ -240,7 +232,7 @@
                                 <div id="sf3" class="frm">
 
                                     <fieldset>
-                                        <legend>Step 3 of 3 | Descripción y confirmación</legend>
+                                        <legend>Paso 3 de 3 | Descripción y confirmación</legend>
 
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label" for="upass1">Receta: </label>
@@ -255,15 +247,21 @@
                                                 <ul id="ingredientsCon"></ul>
                                             </div>
                                             <div class="col-lg-6">
-                                                <h4>Descripción:</h4>
-                                                <textarea id="descriptionCon" class="form-control" required></textarea>
+                                                <label>Descripción:</label>
+                                                <textarea id="descriptionCon" class="form-control"></textarea>
+                                                <br />
+                                                <label>Porciones:</label>
+                                                <input class="form-control" id="porcionesCon" data-bind="value:replyNumber" />&nbsp;<span id="errmsg1" style="color: red"></span>
+                                                <br />
+                                                <label>Tiempo de preparación:</label>
+                                                <input class="form-control" id="tiempoCon" data-bind="value:replyNumber" />&nbsp;<span id="errmsg2" style="color: red"></span>
                                             </div>
                                         </div><br />
 
                                         <div class="form-group">
                                             <div class="col-lg-9">
                                                 <h4>Procedimientos:</h4>
-                                                <table id="proceduresCon"></table>
+                                                <ol id="proceduresCon"></ol>
                                             </div>
                                             <div class="col-lg-3">
 
@@ -277,7 +275,6 @@
                                                 <button class="btn btn-warning back3" type="button"><span class="fa fa-arrow-left"></span> Back</button> 
                                                 <!-- Unique class name -->
                                                 <button class="btn btn-primary open3" type="button">Submit </button> 
-                                                <img src="spinner.gif" alt="" id="loader" style="display: none">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -305,43 +302,80 @@
         <script>
             $(document).ready(function () {
 
-                var arrayAll = ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3', 'Ingrediente 4', 'Ingrediente 5', 'Ingrediente 6', 'Ingrediente 7', 'Ingrediente 8', 'Ingrediente 9', 'Ingrediente 10', 'Ingrediente 11'];
+                var arrayAll = [];
                 var arrayProcedures = [];
                 var arrayImages = [];
+                var arrayRecipes = [];
+                getJSON("recetas");
+                getJSON("ingredientes");
 
-                jQuery.each(arrayAll, function (i, val) {
-                    $("#allIngredients").append('<option value="' + i + '">' + val + '</option>');
-                });
+                //Lectura JSON
+                function getJSON(type) {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "json/" + type + ".json";
+                    //var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            myFunction(xmlhttp.responseText, type);
+                        }
+                    }
+                    function myFunction(response, type) {
+                        if (type === "recetas") {
+                            arrayRecipes = JSON.parse(response);
+                        } else {
+                            arrayAll = JSON.parse(response);
+                            var i;
+                            for (i = 0; i < arrayAll.length; i++) {
+                                $("#allIngredients").append('<option value="' + arrayAll[i].id + '">' + arrayAll[i].nombre + '</option>');
+                            }
+                            /*AÑADIR MULTIPLE SELECT*/
+                        }
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                }
 
                 $(".frm").hide("fast");
                 $("#sf1").show("slow");
 
                 // Binding next button on first step
                 $(".open1").click(function () {
-                    $(".frm").hide("fast");
-                    $("#sf2").show("slow");
+                    if ($("#recipeName").val()) {
+                        if ($("#addedIngredients option").size()) {
+                            $(".frm").hide("fast");
+                            $("#sf2").show("slow");
+                        } else {
+                            alert("Ingresa al menos un Ingrediente");
+                        }
+                    } else {
+                        alert("Ingresa un Nombre");
+                    }
+
                 });
 
                 // Binding next button on second step
                 $(".open2").click(function () {
-                    //Jalar todo al form del paso 3
-                    $("#nombreCon").val($("#recipeName").val());
-                    $("#ingredientsCon").empty();
-                    $("#addedIngredients option").each(function (index, element) {
-                        $("#ingredientsCon").append("<li>" + element.text + "</li>");
-                    });
+                    if ($("#proceds").text().length > 0) {
+                        //Jalar todo al form del paso 3
+                        $("#nombreCon").val($("#recipeName").val());
+                        $("#ingredientsCon").empty();
+                        $("#addedIngredients option").each(function (index, element) {
+                            $("#ingredientsCon").append("<li>" + element.text + "</li>");
+                        });
 
-                    jQuery.each(arrayProcedures, function (i, val) {
-                        $("#proceduresCon").append('<tr><td>' + (i + 1) + '</td><td>' + val + '</td></tr>');
-                    });
-                    /*
-                     $("#addedIngredients option").each(function (index, element) {
-                     $("#procedureCon").append("<li>" + element.text + "</li>");
-                     });*/
-                    //esconde los otros
-                    $(".frm").hide("fast");
-                    $("#sf3").show("slow");
-
+                        jQuery.each(arrayProcedures, function (i, val) {
+                            $("#proceduresCon").append('<li>' + val + '</li>');
+                        });
+                        /*
+                         $("#addedIngredients option").each(function (index, element) {
+                         $("#procedureCon").append("<li>" + element.text + "</li>");
+                         });*/
+                        //esconde los otros
+                        $(".frm").hide("fast");
+                        $("#sf3").show("slow");
+                    } else {
+                        alert("Ingresa al menos un Paso de Procedimiento");
+                    }
                 });
 
                 // Binding back button on second step
@@ -359,13 +393,25 @@
                 });
 
                 $(".open3").click(function () {
-                    // used delay form submission for a seccond and show a loader image
-                    $("#loader").show();
-                    setTimeout(function () {
-                        $("#basicform").html('<h2>Thanks for your time.</h2>');
-                    }, 1000);
-                    // Remove this if you are not using ajax method for submitting values
-                    return false;
+                    if ($("#descriptionCon").val()) {
+                        if ($("#porcionesCon").val()) {
+                            if ($("#tiempoCon").val()) {
+                                // used delay form submission for a seccond and show a loader image
+                                $("#loader").show();
+                                setTimeout(function () {
+                                    $("#basicform").html('<h2>Thanks for your time.</h2>');
+                                }, 1000);
+                                // Remove this if you are not using ajax method for submitting values
+                                return false;
+                            } else {
+                                alert("Ingresa un Tiempo de preparación");
+                            }
+                        } else {
+                            alert("Ingresa Cuantas Porciones se obtienen");
+                        }
+                    } else {
+                        alert("Ingresa una Descripción");
+                    }
                 });
 
                 //Paso 1: Anadir y remover de las listas              
@@ -374,12 +420,10 @@
                     $("#allIngredients option:selected").each(function (index, element) {
                         $("#addedIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
                     });
-                    $('option').mousedown(function (e) {
-                        e.preventDefault();
-                        $(this).prop('selected', !$(this).prop('selected'));
-                        return false;
-                    });
+                    $("option:selected").removeAttr("selected");
+                    //AÑADIR SCRIPT MULTIPLE SELECT
                 });
+
                 $('#quita').click(function () {
                     $("#addedIngredients option:selected").each(function (index, element) {
                         $(this).remove();
@@ -391,27 +435,51 @@
                 $('#addProcedure').click(function () {
                     if ($('#procedure').val()) {
                         arrayProcedures.push($('#procedure').val());
-                        $('#procedure').val('');
-                        //if ($('#proImg').val()) {
-                        //arrayImages.push($('#proImg').val());
-                        //$('#proImg').val('');
-                        //} else {
-                        //arrayImages.push('');
-                        //}
+                        var arrL = arrayProcedures.length;
+                        $('#proceds').append('<div class="row" id="div' + arrL + '">\n\
+                                                <div class="col-lg-1">\n\
+                                                    <button type="button" id="' + arrL + '" class="btn btn-default remueveP">X</button>\n\
+                                                </div>\n\
+                                                <div class="col-lg-11">\n\
+                                                    <p>' + $('#procedure').val() + '</p>\n\
+                                                </div><hr>\n\
+                                            </div>');
 
+                        $('.remueveP').click(function () {
+                            var num = $(this).attr('id');
+                            $('#div' + num).empty();
+                            arrayProcedures.eq(num - 1).val('');
+                        });
+
+                        $('#procedure').val('');
                     } else {
                         alert('campo vacio');
                     }
                 });
 
-                //Multiple select without ctrl
-                $('option').mousedown(function (e) {
-                    e.preventDefault();
-                    $(this).prop('selected', !$(this).prop('selected'));
-                    return false;
-                });                
+                //Multiple select without ctrl AÑADIR
+                
+
+                $("#porcionesCon").keypress(function (e) {
+                    //if the letter is not digit then display error and don't type anything
+                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                        //display error message
+                        $("#errmsg1").html("Solo Digitos").show().fadeOut("slow");
+                        return false;
+                    }
+                });
+                $("#tiempoCon").keypress(function (e) {
+                    //if the letter is not digit then display error and don't type anything
+                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                        //display error message
+                        $("#errmsg2").html("Solo Digitos").show().fadeOut("slow");
+                        return false;
+                    }
+                });
+
             });
         </script>
+
         <!-- Morris Charts JavaScript -->
         <script src="js/plugins/morris/raphael.min.js"></script>
         <script src="js/plugins/morris/morris.min.js"></script>
