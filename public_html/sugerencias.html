@@ -59,7 +59,8 @@
 
                                 <div class="form-group">
                                     <label>Incluir ingredientes</label>
-                                    <input class="form-control" id="incluir">                                    
+                                    <!--<input class="form-control" id="incluir">-->                                    
+                                    <select class="form-control" id="incluir" multiple size="1"></select>
                                 </div>
 
                                 <div class="form-group">
@@ -78,7 +79,8 @@
 
                             <div class="form-group">
                                 <label>Filtrar ingredientes</label>
-                                <input class="form-control" id="excluir">                                
+                                <!--<input class="form-control" id="excluir">-->                                
+                                <select class="form-control" id="excluir" multiple size="1"></select>
                             </div>
 
                             <div class="form-group">
@@ -118,6 +120,42 @@
                 $('#formaIng').submit(function (e) {
                     e.preventDefault();
                 });
+                
+                
+                var arrayAll = [];
+                var arrayProcedures = [];
+                var arrayRecipes = [];
+                getJSON("recetas");
+                getJSON("ingredientes");
+                /*************PRUEBA*****************************/
+                //Lectura JSON
+                function getJSON(type) {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "json/" + type + ".json";
+                    //var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            myFunction(xmlhttp.responseText, type);
+                        }
+                    }
+                    function myFunction(response, type) {
+                        if (type === "recetas") {
+                            arrayRecipes = JSON.parse(response);
+                        } else {
+                            arrayAll = JSON.parse(response);
+                            var i;
+                            for (i = 0; i < arrayAll.length; i++) {
+                                $("#incluir").append('<option value="' + arrayAll[i].nombre + '">' + arrayAll[i].nombre + '</option>');
+                                $("#excluir").append('<option value="' + arrayAll[i].nombre + '">' + arrayAll[i].nombre + '</option>');
+                            }
+                            /*AÑADIR MULTIPLE SELECT*/
+                        }
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                }
+                
+                /*******************PRUEBA**************/
 
                 var n = document.getElementById("incluir");
                 var arrIngredientesIncluidos = [];
