@@ -291,8 +291,8 @@
                 "cantidad": 1.0
             }, {
                 "ing": {
-                    "nombre": "Lechuga",
-                    "id": 5
+                    "nombre": "Espinaca",
+                    "id": 2
                 },
                 "unidad": "gr",
                 "cantidad": 300.0
@@ -394,7 +394,7 @@
         "fechaCrecion": "sep 1, 2015",
         "ingredientes": [{
                 "ing": {
-                    "nombre": "Filete de Res",
+                    "nombre": "Pechuga de pollo",
                     "id": 1
                 },
                 "unidad": "kg",

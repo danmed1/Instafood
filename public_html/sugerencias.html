@@ -280,7 +280,7 @@
                     if (e.which == 13) {
                         $('#listaIncluidos').append('<option>' + n.value + '</option>');
                         arrIngredientesIncluidos.push(n.value);
-                        n.value = '';
+                        n.value = '';                        
                     }
                 });
                 var m = document.getElementById("excluir");
@@ -288,7 +288,7 @@
                     if (e.which == 13) {
                         $('#listaExcl').append('<option>' + m.value + '</option>');
                         arrIngredientesExcluidos.push(m.value);
-                        m.value = '';
+                        m.value = '';                        
                     }
                 });
                 $("#quitarInc").click(function () {
@@ -296,7 +296,7 @@
                         var x = $(this);
                         var index = arrIngredientesIncluidos.indexOf(x.val());
                         arrIngredientesIncluidos.splice(index, 1);
-                        $(this).remove();
+                        $(this).remove();                        
                     });
                 });
                 $("#quitarExc").click(function () {
@@ -304,10 +304,9 @@
                         var x = $(this);
                         var index = arrIngredientesExcluidos.indexOf(x.val());
                         arrIngredientesExcluidos.splice(index, 1);
-                        $(this).remove();
+                        $(this).remove();                        
                     });
                 });
-
                 $('#buscarRecetas').click(function () {
                     document.getElementById("id01").innerHTML = " ";
                     var xmlhttp = new XMLHttpRequest();
@@ -325,73 +324,108 @@
                         var out = "<table><tr><td>";
                         var recetasEncontradas = [];
                         var recetasExcluidas = [];
-                        var nombreEncontrados = [];
-                        var nombreExcluidos = [];
+                        var idEncontrados = [];
+                        var contadorIngredientes = [];
+                        var idExcluidos = [];
                         var sizeIngIncl = arrIngredientesIncluidos.length;
                         var sizeIngExcl = arrIngredientesExcluidos.length;
                         //LLENA LOS ARREGLOS CON LAS COINCIDENCIAS DE RECETAS E INGREDIENTES                        
                         for (i = 0; i < arr.length; i++) {
+                            contadorIngredientes[i] = 0;
                             var n = arr[i].ingredientes.length;
                             for (j = 0; j < n; j++) {
                                 for (k = 0; k < sizeIngIncl; k++) {
                                     if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesIncluidos[k]) {
                                         recetasEncontradas.push(arr[i].image);
-                                        nombreEncontrados.push(arr[i].id);
+                                        idEncontrados.push(arr[i].id);
+                                        contadorIngredientes[i] += 1;
                                     }
                                 }
                                 for (k = 0; k < sizeIngExcl; k++) {
                                     if ((arr[i].ingredientes[j].ing.nombre) == arrIngredientesExcluidos[k]) {
                                         recetasExcluidas.push(arr[i].image);
-                                        nombreExcluidos.push(arr[i].nombre);
+                                        idExcluidos.push(arr[i].id);
                                     }
                                 }
                             }
                         }
-                        
-                        //ELIMINA REPETICIONES                        
-                        var unicos= [];
-                        $.each(nombreEncontrados, function (i, el) {
-                            if ($.inArray(el, unicos) === -1)
-                                unicos.push(el);
-                        });
-                        nombresEncontrados=unicos;                        
-                        
-                        unicos = [];
-                        $.each(recetasEncontradas ,function (i, el) {
-                            if ($.inArray(el, unicos) === -1)
-                                unicos.push(el);
-                        });
-                        recetasEncontradas=unicos;
-                        
-                        unicos = [];
-                        $.each(recetasExcluidas ,function (i, el) {
-                            if ($.inArray(el, unicos) === -1)
-                                unicos.push(el);
-                        });
-                        recetasExcluidas=unicos;
-                        
-                        unicos = [];
-                        $.each(nombreExcluidos ,function (i, el) {
-                            if ($.inArray(el, unicos) === -1)
-                                unicos.push(el);
-                        });
-                        nombreExcluidos=unicos;                                                
-                        
-                        //ELIMINA LAS RECETAS ENCONTRADAS QUE INCLUYEN INGREDIENTES EXCLUIDOS
-                        for (i = 0; i <= recetasEncontradas.length; i++) {
-                            for (j = 0; j <= recetasExcluidas.length; j++) {
-                                if (recetasEncontradas[i] == recetasExcluidas[j]) {
-                                    recetasEncontradas.splice(i, 1);
-                                    nombreEncontrados.splice(i, 1);
+                        //ELIMINAR 0'S DEL CONTADOR DE INGREDIENTES  
+                        while (contadorIngredientes.indexOf(0) != (-1)) {
+                            for (i = 0; i < contadorIngredientes.length; i++) {
+                                if (contadorIngredientes[i] == 0) {
+                                    contadorIngredientes.splice(i, 1);
                                 }
                             }
                         }
+                        //ELIMINA REPETICIONES                        
+                        var unicos = [];
+                        $.each(idEncontrados, function (i, el) {
+                            if ($.inArray(el, unicos) === -1)
+                                unicos.push(el);
+                        });
+                        idEncontrados = unicos;
+
+                        unicos = [];
+                        $.each(recetasEncontradas, function (i, el) {
+                            if ($.inArray(el, unicos) === -1)
+                                unicos.push(el);
+                        });
+                        recetasEncontradas = unicos;
+
+                        unicos = [];
+                        $.each(recetasExcluidas, function (i, el) {
+                            if ($.inArray(el, unicos) === -1)
+                                unicos.push(el);
+                        });
+                        recetasExcluidas = unicos;
+
+                        unicos = [];
+                        $.each(idExcluidos, function (i, el) {
+                            if ($.inArray(el, unicos) === -1)
+                                unicos.push(el);
+                        });
+                        idExcluidos = unicos;
+
+                        /*alert(contadorIngredientes);
+                         alert(recetasEncontradas);
+                         alert(idEncontrados);*/
+
+                        //ORDENA LAS RECETAS DE MAYOR A MENOR COINCIDENCIAS 
+                        var aux = [];
+                        var auxRecetas = [];
+                        var auxId = [];
+                        for (i = 0; i < contadorIngredientes.length; i++) {
+                            for (j = 0; j < contadorIngredientes.length; j++) {
+                                if (contadorIngredientes[i] > contadorIngredientes[j]) {
+                                    //ORDENA EL CONTADOR
+                                    aux = contadorIngredientes[j];
+                                    contadorIngredientes[j] = contadorIngredientes[i];
+                                    contadorIngredientes[i] = aux;
+                                    //ORDENA LAS IMAGENES
+                                    auxRecetas = recetasEncontradas[j];
+                                    recetasEncontradas[j] = recetasEncontradas[i];
+                                    recetasEncontradas[i] = auxRecetas;
+                                    //ORDENA LOS ID'S
+                                    auxId = idEncontrados[j];
+                                    idEncontrados[j] = idEncontrados[i];
+                                    idEncontrados[i] = auxId;
+                                }
+                            }
+                        }
+                        
+                        //ELIMINA LAS RECETAS ENCONTRADAS QUE INCLUYEN INGREDIENTES EXCLUIDOS
+
+                        var diff = $(idEncontrados).not(idExcluidos).get();
+                        idEncontrados = diff;                        
+
+                        diff = $(recetasEncontradas).not(recetasExcluidas).get();
+                        recetasEncontradas = diff;                        
 
                         //ESCRIBE TODAS LAS RECETAS QUE ENCUETRA
                         for (i = 0; i < recetasEncontradas.length; i++) {
-                            out += '<a href="template-receta.html?id=' + nombreEncontrados[i] + '"><img src="img/' + recetasEncontradas[i] + '" /></a>  &nbsp;';
+                            out += '<a href="template-receta.html?id=' + idEncontrados[i] + '"><img src="img/' + recetasEncontradas[i] + '" /></a>  &nbsp;';
                         }
-                        out += "</table>";                        
+                        out += "</table>";
                         document.getElementById("id01").innerHTML = out;
                     }
                 });
