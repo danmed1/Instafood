@@ -106,13 +106,10 @@
                     }
                 }
 
-
-
-
                 //Lectura JSON
                 function getJSON(type) {
                     var xmlhttp = new XMLHttpRequest();
-                    var url = "json/recetas.json";
+                    var url = "json/" + type + ".json";
                     //var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -124,10 +121,11 @@
 
                         var i;
                         var name = getUrlParameter('name');
+                        var ban = true;
 
                         for (i = 0; i < arrayRecipes.length; i++) {
-                            if (arrayRecipes[i].nombre.toLowerCase().indexOf(name.toLowerCase())>=0) {
-
+                            if (arrayRecipes[i].nombre.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+                                ban = false;
                                 $("#recetas").append('<div class="col-lg-3 col-md-6">\n\
                                                         <div class="panel panel-red">\n\
                                                             <a href="template-receta.html?id=' + arrayRecipes[i].id + '">\n\
@@ -145,20 +143,21 @@
                                                     </div>');
                             }
                         }
-
+                        if(ban){
+                            $("#recetas").append("<h3>No se encontró ninguna receta con \""+name+"\"</h3>");
+                        }
                     }
                     xmlhttp.open("GET", url, true);
                     xmlhttp.send();
                 }
 
-                var arrayRecipes = [];
-                getJSON("recetas");
-                
                 $('#bsearch').click(function () {
                     var s = $("#searching").val();
                     window.location = "template-busqueda.html?name=" + s;
                 });
 
+                var arrayRecipes = [];
+                getJSON("recetas");
             });
         </script>
         <!-- Morris Charts JavaScript -->
