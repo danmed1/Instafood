@@ -330,37 +330,37 @@
             }]    
     },{
         "id": 6,
-        "nombre": "Brocheta22",
-        "descripcion": "Deliciosas brochetas de res para asar",
+        "nombre": "Pastel de chocolate",
+        "descripcion": "Delicioso postre para mantener la figura de trompo",
         "porciones": 10,
         "tiempoPrep": 20,
         "fechaCrecion": "sep 1, 2015",
-        "tipo": "cena",
+        "tipo": "postre",
         "image": "food7.jpg",
         "ingredientes": [{
                 "ing": {
-                    "nombre": "Filete de Res",
-                    "id": 1
+                    "nombre": "Harina",
+                    "id": 3
                 },
                 "unidad": "kg",
                 "cantidad": 1.0
             }, {
                 "ing": {
-                    "nombre": "Tocino ahumado",
+                    "nombre": "Huevos",
                     "id": 5
                 },
                 "unidad": "gr",
                 "cantidad": 300.0
             }, {
                 "ing": {
-                    "nombre": "Pimiento",
+                    "nombre": "Aceite de oliva",
                     "id": 6
                 },
                 "unidad": "pz",
                 "cantidad": 4.0
             }, {
                 "ing": {
-                    "nombre": "Jitomate",
+                    "nombre": "Mantequilla",
                     "id": 7
                 },
                 "unidad": "pz",

@@ -61,5 +61,42 @@
                 "nombre": "Verdura",
                 "id": 2
             }]
+    },{
+        "nombre": "Sal",
+        "id": 9,
+        "listaCats": [{
+                "nombre": "Especias",
+                "id": 3
+            }]
+    },
+    {
+        "nombre": "Hierbas finas",
+        "id": 10,
+        "listaCats": [{
+                "nombre": "Especias",
+                "id": 3
+            }]
+    },{
+        "nombre": "Salchicha",
+        "id": 11,
+        "listaCats": [{
+                "nombre": "Embutido",
+                "id": 4
+            }]
+    },{
+        "nombre": "Queso fresco",
+        "id": 12,
+        "listaCats": [{
+                "nombre": "Lacteos",
+                "id": 5
+            }]
+    },{
+        "nombre": "Queso parmesano",
+        "id": 13,
+        "listaCats": [{
+                "nombre": "Lacteos",
+                "id": 5
+            }]
     }
+    
     ]
