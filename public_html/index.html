@@ -29,7 +29,6 @@
         <script src="js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function () {
-                alert("entra");
                 var arrayRecipes = [];
                 getJSON("recetas");
                 //Lectura JSON
@@ -52,15 +51,8 @@
                 }
 
                 $('#bsearch').click(function () {
-                    alert("entro");
                     var s = $("#searching").val();
-                    var i;
-                    for (i = 0; i < arrayRecipes.length; i++) {
-                        if (arrayRecipes[i].nombre === s) {
-                            $.load("template-receta.html?id=" + arrayRecipes[i].id);
-                        }
-                    }
-                    alert("NO se encontro ninguna receta");
+                    window.location = "template-busqueda.html?name=" + s;
                 });
             });</script>
         <!-- Morris Charts JavaScript -->
