@@ -1,17 +1,15 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 
     <head>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Instafood | Recetas</title>
+        <title>Instafood | Busqueda</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +38,6 @@
 
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #E80307;" id="navbarCode"></nav>
-
             <div id="page-wrapper">
 
                 <div class="container-fluid">
@@ -68,30 +65,10 @@
                     <!-- /.row -->
 
                     <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <center><h1 id="titleR"></h1></center><br />
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <img class="img-thumbnail" id="imageR" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <label>Descripción:</label>
-                                    <textarea class="form-control" id="descripcionR" readonly></textarea><br />
-                                    <label>Tiempo de Preparación(min):</label>
-                                    <input class="form-control" type="text" id="tiempoR" readonly="" /><br />
-                                    <label>Porciones:</label>
-                                    <input class="form-control" type="text" id="porcionesR" readonly="" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <h2>Ingredientes:</h2><ul id="ingredientesR"></ul>
-                                </div>
-                                <div class="col-lg-8">
-                                    <h2>Procedimiento:</h2><ol id="procedimientosR"></ol>
-                                </div>
-                            </div>                                                                                  
-                        </div>                                                
+
+                        <div class="col-lg-12" id="recetas">
+
+                        </div>
                     </div>
                     <!-- /.row -->
 
@@ -102,15 +79,17 @@
             <!-- /#page-wrapper -->
 
         </div>
-        <!-- /#wrapper -->                                    
+        <!-- /#wrapper -->
 
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
+
         <script>
             $(document).ready(function () {
+
                 $("#navbarCode").load("navbar.html");
                 function getUrlParameter(sParam) {
                     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -126,10 +105,7 @@
                         }
                     }
                 }
-                var id = getUrlParameter('id');
 
-                var arrayRecipes = [];
-                getJSON("recetas");
                 //Lectura JSON
                 function getJSON(type) {
                     var xmlhttp = new XMLHttpRequest();
@@ -140,22 +116,35 @@
                             myFunction(xmlhttp.responseText, type);
                         }
                     }
-                    function myFunction(response, type) {
-                        if (type === "recetas") {
-                            arrayRecipes = JSON.parse(response);
-                            document.getElementById("titleR").innerHTML=arrayRecipes[id].nombre;
-                            $("#descripcionR").val(arrayRecipes[id].descripcion);
-                            $("#tiempoR").val(arrayRecipes[id].tiempoPrep);
-                            $("#porcionesR").val(arrayRecipes[id].porciones);
-                            $("#imageR").attr("src","img/"+arrayRecipes[id].image);
-                            var i;
-                            for(i=0;i<arrayRecipes[id].ingredientes.length;i++){
-                                $("#ingredientesR").append('<li>' + arrayRecipes[id].ingredientes[i].cantidad + 
-                                arrayRecipes[id].ingredientes[i].unidad + " de " + arrayRecipes[id].ingredientes[i].ing.nombre + '</li>');
+                    function myFunction(response) {
+                        arrayRecipes = JSON.parse(response);
+
+                        var i;
+                        var name = getUrlParameter('name');
+                        var ban = true;
+
+                        for (i = 0; i < arrayRecipes.length; i++) {
+                            if (arrayRecipes[i].nombre.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+                                ban = false;
+                                $("#recetas").append('<div class="col-lg-3 col-md-6">\n\
+                                                        <div class="panel panel-red">\n\
+                                                            <a href="template-receta.html?id=' + arrayRecipes[i].id + '">\n\
+                                                            <div class="panel-heading panel-food">\n\
+                                                                <img src="img/desayunos/' + arrayRecipes[i].image + '" />\n\
+                                                                <div class="row">\n\
+                                                                    <div class="col-xs-3"></div>\n\
+                                                                    <div class="col-xs-9 text-right">\n\
+                                                                    <div class="med">' + arrayRecipes[i].nombre + '</div>\
+                                                                    </div>\n\
+                                                                </div>\n\
+                                                            </div>\n\
+                                                            </a>\n\
+                                                        </div>\n\
+                                                    </div>');
                             }
-                            for(i=0;i<arrayRecipes[id].procedimiento.length;i++){
-                                $("#procedimientosR").append('<li>' + arrayRecipes[id].procedimiento[i].pro + '</li>');
-                            }
+                        }
+                        if(ban){
+                            $("#recetas").append("<h3>No se encontró ninguna receta con \""+name+"\"</h3>");
                         }
                     }
                     xmlhttp.open("GET", url, true);
@@ -166,6 +155,9 @@
                     var s = $("#searching").val();
                     window.location = "template-busqueda.html?name=" + s;
                 });
+
+                var arrayRecipes = [];
+                getJSON("recetas");
             });
         </script>
         <!-- Morris Charts JavaScript -->

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Instafood | Busqueda</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/sb-admin.css" rel="stylesheet">
+
+        <!-- Morris Charts CSS -->
+        <link href="css/plugins/morris.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #E80307;" id="navbarCode"></nav>
+            <div id="page-wrapper">
+
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h1 class="page-header">
+                                Busqueda
+                            </h1>                            
+                        </div>
+                        <div class="col-lg-3">
+                            <h1 class="page-header">
+                                <small>Busca tu receta</small>
+                            </h1>                            
+                        </div>
+                        <div class="col-lg-6 page-header">                            
+                            <div class="form-group input-group">
+                                <input type="text" id="searching" class="form-control">
+                                <span class="input-group-btn"><button class="btn btn-default" id="bsearch" type="button"><i class="fa fa-search"></i></button></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.row -->
+
+                    <div class="row">
+
+                        <div class="col-lg-12" id="recetas">
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="panel panel-default">
+
+                                <div class="panel-body">
+                                    <center><img src="img/inicio.png" class="img-responsive"/></center>
+                                </div>
+                            </div>
+                        </div>                                            
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">just now</span>
+                                            <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">4 minutes ago</span>
+                                            <i class="fa fa-fw fa-comment"></i> Commented on a post
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">23 minutes ago</span>
+                                            <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">46 minutes ago</span>
+                                            <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">1 hour ago</span>
+                                            <i class="fa fa-fw fa-user"></i> A new user has been added
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">2 hours ago</span>
+                                            <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">yesterday</span>
+                                            <i class="fa fa-fw fa-globe"></i> Saved the world
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">two days ago</span>
+                                            <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                                        </a>
+                                    </div>
+                                    <div class="text-right">
+                                        <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#navbarCode").load("navbar.html");
+                function getUrlParameter(sParam) {
+                    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                            sURLVariables = sPageURL.split('&'),
+                            sParameterName,
+                            i;
+
+                    for (i = 0; i < sURLVariables.length; i++) {
+                        sParameterName = sURLVariables[i].split('=');
+
+                        if (sParameterName[0] === sParam) {
+                            return sParameterName[1] === undefined ? true : sParameterName[1];
+                        }
+                    }
+                }
+
+
+
+
+                //Lectura JSON
+                function getJSON(type) {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "json/recetas.json";
+                    //var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            myFunction(xmlhttp.responseText, type);
+                        }
+                    }
+                    function myFunction(response) {
+                        arrayRecipes = JSON.parse(response);
+
+                        var i;
+                        var name = getUrlParameter('name');
+
+                        for (i = 0; i < arrayRecipes.length; i++) {
+                            if (arrayRecipes[i].tipo === name) {
+
+                                $("#recetas").append('<div class="col-lg-3 col-md-6">\n\
+                                                        <div class="panel panel-red">\n\
+                                                            <a href="template-receta.html?id=' + arrayRecipes[i].id + '">\n\
+                                                            <div class="panel-heading panel-food">\n\
+                                                                <img src="img/desayunos/' + arrayRecipes[i].image + '" />\n\
+                                                                <div class="row">\n\
+                                                                    <div class="col-xs-3"></div>\n\
+                                                                    <div class="col-xs-9 text-right">\n\
+                                                                    <div class="med">' + arrayRecipes[i].nombre + '</div>\
+                                                                    </div>\n\
+                                                                </div>\n\
+                                                            </div>\n\
+                                                            </a>\n\
+                                                        </div>\n\
+                                                    </div>');
+                            }
+                        }
+
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                }
+
+                var arrayRecipes = [];
+                getJSON("recetas");
+                
+                $('#bsearch').click(function () {
+                    var s = $("#searching").val();
+                    window.location = "template-busqueda.html?name=" + s;
+                });
+
+            });
+        </script>
+        <!-- Morris Charts JavaScript -->
+        <script src="js/plugins/morris/raphael.min.js"></script>
+        <script src="js/plugins/morris/morris.min.js"></script>
+        <script src="js/plugins/morris/morris-data.js"></script>
+
+    </body>
+
+</html>
