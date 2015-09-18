@@ -96,26 +96,7 @@
                         <div class="col-lg-12">                            
                             <div class="page-header">
                                 <h1>Recetas encontradas</h1>
-                            </div>
-                            <!--<div class="col-lg-4">             
-                                <img class="img-thumbnail" src="img/food1.jpg" alt="">                                
-                            </div>
-                            <div class="col-lg-4">                                             
-                                <img class="img-thumbnail" src="img/food2.jpeg" alt="">
-                            </div>
-                            <div class="col-lg-4">             
-                                <img class="img-thumbnail" src="img/food3.jpg" alt="">                            
-                            </div>
-                            <div class="col-lg-4">             
-                                <img class="img-thumbnail" src="img/food4.jpg" alt="">                            
-                            </div>
-                            <div class="col-lg-4">             
-                                <img class="img-thumbnail" src="img/food5.jpg" alt="">                            
-                            </div>
-                            <div class="col-lg-4">             
-                                <img class="img-thumbnail" src="img/food6.jpg" alt="">                            
-                            </div>-->
-
+                            </div>                            
                             <div id="id01"></div>                            
                         </div>
                     </div>
@@ -142,18 +123,18 @@
                 var arrIngredientesIncluidos = [];
                 var arrIngredientesExcluidos = [];
                 $(n).keypress(function (e) {
-                    if (e.which == 13) {
+                    if (e.which == 13 && n.value != '') {
                         $('#listaIncluidos').append('<option>' + n.value + '</option>');
                         arrIngredientesIncluidos.push(n.value);
-                        n.value = '';                        
+                        n.value = '';
                     }
                 });
                 var m = document.getElementById("excluir");
                 $(m).keypress(function (e) {
-                    if (e.which == 13) {
+                    if (e.which == 13 && m.value != '') {
                         $('#listaExcl').append('<option>' + m.value + '</option>');
                         arrIngredientesExcluidos.push(m.value);
-                        m.value = '';                        
+                        m.value = '';
                     }
                 });
                 $("#quitarInc").click(function () {
@@ -161,7 +142,7 @@
                         var x = $(this);
                         var index = arrIngredientesIncluidos.indexOf(x.val());
                         arrIngredientesIncluidos.splice(index, 1);
-                        $(this).remove();                        
+                        $(this).remove();
                     });
                 });
                 $("#quitarExc").click(function () {
@@ -169,9 +150,10 @@
                         var x = $(this);
                         var index = arrIngredientesExcluidos.indexOf(x.val());
                         arrIngredientesExcluidos.splice(index, 1);
-                        $(this).remove();                        
+                        $(this).remove();
                     });
                 });
+
                 $('#buscarRecetas').click(function () {
                     document.getElementById("id01").innerHTML = " ";
                     var xmlhttp = new XMLHttpRequest();
@@ -251,10 +233,6 @@
                         });
                         idExcluidos = unicos;
 
-                        /*alert(contadorIngredientes);
-                         alert(recetasEncontradas);
-                         alert(idEncontrados);*/
-
                         //ORDENA LAS RECETAS DE MAYOR A MENOR COINCIDENCIAS 
                         var aux = [];
                         var auxRecetas = [];
@@ -277,14 +255,14 @@
                                 }
                             }
                         }
-                        
+
                         //ELIMINA LAS RECETAS ENCONTRADAS QUE INCLUYEN INGREDIENTES EXCLUIDOS
 
                         var diff = $(idEncontrados).not(idExcluidos).get();
-                        idEncontrados = diff;                        
+                        idEncontrados = diff;
 
                         diff = $(recetasEncontradas).not(recetasExcluidas).get();
-                        recetasEncontradas = diff;                        
+                        recetasEncontradas = diff;
 
                         //ESCRIBE TODAS LAS RECETAS QUE ENCUETRA
                         for (i = 0; i < recetasEncontradas.length; i++) {
@@ -294,6 +272,7 @@
                         document.getElementById("id01").innerHTML = out;
                     }
                 });
+
 
             </script>
 
