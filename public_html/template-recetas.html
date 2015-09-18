@@ -204,7 +204,8 @@
                         arrayRecipes = JSON.parse(response);
 
                         var i;
-                        var name = getUrlParameter('name');
+                        var temp=getUrlParameter('tipo');
+                        var name = temp.substring(0,temp.length-1).toLowerCase();
 
                         for (i = 0; i < arrayRecipes.length; i++) {
                             if (arrayRecipes[i].tipo === name) {

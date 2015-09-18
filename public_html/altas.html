@@ -369,7 +369,7 @@
                                 arrayRecipes.push(nueva);
                                 var jsonNuevo = JSON.stringify(arrayRecipes);
                                 var intento = JSON.parse(jsonNuevo);
-                                //console.log(intento);
+                                console.log(intento);
                                 setTimeout(function () {
                                     $("#basicform").html('<h2>Thanks for your time.</h2>');
                                 }, 1000);
@@ -394,8 +394,9 @@
                 $('#anade').click(function () {
                     //$("#addedIngredients").empty();
                     $("#allIngredients option:selected").each(function (index, element) {
-                        if (!optionExists("#addedIngredients", element.value)) {
+                        if (!optionExists("#addedIngredients", element.value)) {                            
                             $("#addedIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
+                            $(this).remove();
                         }
                     });
                     $("option:selected").removeAttr("selected");
@@ -404,6 +405,7 @@
 
                 $('#quita').click(function () {
                     $("#addedIngredients option:selected").each(function (index, element) {
+                        $("#allIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
                         $(this).remove();
                     });
 
