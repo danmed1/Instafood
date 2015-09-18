@@ -47,12 +47,22 @@
 
                     <!-- Page Heading -->
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-3">
                             <h1 class="page-header">
-                                Añade tu receta
+                                Busqueda
                             </h1>                            
                         </div>
-
+                        <div class="col-lg-3">
+                            <h1 class="page-header">
+                                <small>Busca tu receta</small>
+                            </h1>                            
+                        </div>
+                        <div class="col-lg-6 page-header">                            
+                            <div class="form-group input-group">
+                                <input type="text" id="searching" class="form-control">
+                                <span class="input-group-btn"><button class="btn btn-default" id="bsearch" type="button"><i class="fa fa-search"></i></button></span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- /.row -->
@@ -152,7 +162,10 @@
                     xmlhttp.send();
                 }
 
-
+                $('#bsearch').click(function () {
+                    var s = $("#searching").val();
+                    window.location = "template-busqueda.html?name=" + s;
+                });
             });
         </script>
         <!-- Morris Charts JavaScript -->
