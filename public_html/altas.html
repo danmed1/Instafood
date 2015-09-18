@@ -261,10 +261,10 @@
                                                 <textarea id="descriptionCon" class="form-control"></textarea>
                                                 <br />
                                                 <label>Porciones:</label>
-                                                <input class="form-control" id="porcionesCon" data-bind="value:replyNumber" />&nbsp;<span id="errmsg1" style="color: red"></span>
+                                                <input class="form-control" id="porcionesCon" type="number" />
                                                 <br />
                                                 <label>Tiempo de preparación:</label>
-                                                <input class="form-control" id="tiempoCon" data-bind="value:replyNumber" />&nbsp;<span id="errmsg2" style="color: red"></span>
+                                                <input class="form-control" id="tiempoCon" type="number" />
                                             </div>
                                         </div><br />
 
@@ -280,7 +280,9 @@
                                                     <option value="comida">comida</option>
                                                     <option value="cena">cena</option>
                                                     <option value="snack">snack</option>
-                                                </select>
+                                                </select><br />
+                                                <label>Imagen:</label>
+                                                <input type="file" id="imageCon" class="form-control" />
                                             </div>
                                         </div><br />
 
@@ -376,7 +378,7 @@
                         $("#ingredientsCon").empty();
                         $("#addedIngredients option").each(function (index, element) {
                             $("#ingredientsCon").append("<tr><td>" + element.text + "</td>\n\
-                            <td><input class=\"form-control\" type=\"text\" id=\"can" + index + "\" /></td>\n\
+                            <td><input class=\"form-control\" type=\"number\" id=\"can" + index + "\" /></td>\n\
                             <td><select class=\"form-control\" id=\"uni" + index + "\">\n\
                                     <option value=\"kg\">kg</option>\n\
                                     <option value=\"g\">g</option>\n\
@@ -416,16 +418,57 @@
                 $(".open3").click(function () {
                     if ($("#descriptionCon").val()) {
                         if ($("#porcionesCon").val()) {
-                            if ($("#tiempoCon").val()) {
+                            if ($("#tiempoCon").val() && $("#imageCon").val()) {
                                 // used delay form submission for a seccond and show a loader image
                                 $("#loader").show();
+                                var ing = [];
+                                var pro = [];
+                                
+                                $("#addedIngredients option").each(function (index, element) {
+                                    var aux = {};
+                                    var aux2 = {};
+                                    
+                                    aux2["nombre"] = element.text;
+                                    aux2["id"] = element.value;
+                                    
+                                    aux["unidad"] = $("#uni"+index+" option:selected").val();
+                                    aux["cantidad"] = $("#can"+index).val();
+                                    
+                                    aux["ing"] = aux2;
+                                    ing.push(aux);
+                                });
+                                
+                                var i;
+                                for (i = 0; i < arrayProcedures.length; i++) {
+                                    var aux = {};
+                                    aux["paso"] = i + 1;
+                                    aux["pro"] = arrayProcedures[i];
+                                    pro.push(aux);
+                                }
+
+                                var nueva = {
+                                    "id": arrayRecipes.length,
+                                    "nombre": $("#recipeName").val(),
+                                    "descripcion": $("#descriptionCon").val(),
+                                    "porciones": $("#porcionesCon").val(),
+                                    "tiempoPrep": $("#tiempoCon").val(),
+                                    "fechaCrecion": new Date().toDateString(),
+                                    "tipo": $("#tipoCon").val(),
+                                    "image": $('#imageCon[type=file]').val().split('\\').pop(),
+                                    "ingredientes": ing,
+                                    "procedimiento": pro
+                                }
+                                arrayRecipes.push(nueva);
+                                var jsonNuevo = JSON.stringify(arrayRecipes);
+                                var intento = JSON.parse(jsonNuevo);
+                                //console.log(intento);
                                 setTimeout(function () {
                                     $("#basicform").html('<h2>Thanks for your time.</h2>');
                                 }, 1000);
                                 // Remove this if you are not using ajax method for submitting values
                                 return false;
                             } else {
-                                alert("Ingresa un Tiempo de preparación");
+                                alert("Ingresa un Tiempo de preparación e imagen");
                             }
                         } else {
                             alert("Ingresa Cuantas Porciones se obtienen");
@@ -435,15 +478,15 @@
                     }
                 });
 
-                function optionExists(sel,val) {
-                    return $(sel+" option[value='" + val + "']").length !== 0;
+                function optionExists(sel, val) {
+                    return $(sel + " option[value='" + val + "']").length !== 0;
                 }
 
                 //Paso 1: Anadir y remover de las listas              
                 $('#anade').click(function () {
                     //$("#addedIngredients").empty();
                     $("#allIngredients option:selected").each(function (index, element) {
-                        if (!optionExists("#addedIngredients",element.value)) {
+                        if (!optionExists("#addedIngredients", element.value)) {
                             $("#addedIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
                         }
                     });
@@ -482,36 +525,11 @@
                     } else {
                         alert('campo vacio');
                     }
-                });
-
-                //Multiple select without ctrl AÑADIR
-
-
-                $("#porcionesCon").keypress(function (e) {
-                    //if the letter is not digit then display error and don't type anything
-                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                        //display error message
-                        $("#errmsg1").html("Solo Digitos").show().fadeOut("slow");
-                        return false;
-                    }
-                });
-                $("#tiempoCon").keypress(function (e) {
-                    //if the letter is not digit then display error and don't type anything
-                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                        //display error message
-                        $("#errmsg2").html("Solo Digitos").show().fadeOut("slow");
-                        return false;
-                    }
-                });
-
+                });                                
             });
         </script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="js/plugins/morris/raphael.min.js"></script>
-        <script src="js/plugins/morris/morris.min.js"></script>
-        <script src="js/plugins/morris/morris-data.js"></script>
-        <script src="js/plugins/jquery-validation/Gruntfile.js"></script>
+        <!-- JQUERY plugins -->
         <script src="js/plugins/jquery-steps/jquery.steps.js"></script>
         <script src="js/plugins/jquery-steps/jquery.steps.min.js"></script>        
 
