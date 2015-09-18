@@ -10,7 +10,7 @@ var comidasArray = [];
 var desayunosArray = [];
 var cenasArray = [];
 var snacksArray = [];
-var todasComidas=[];
+var todasComidas = [];
 $(document).ready(function () {
     encuentraImagenesRecetas();
     intervalId = window.setInterval(caroussel, 3000);
@@ -20,20 +20,21 @@ $(document).ready(function () {
     $("#slideContainer").mouseout(function () {
         intervalId = window.setInterval(caroussel, 3000);
     });
-    
+
 });
 function caroussel() {
-    caroussel2("imgDesayunos",desayunosArray);
-    caroussel2("imgComidas",comidasArray);
-    caroussel2("imgCenas",cenasArray);
-    caroussel2("imgSnacks",snacksArray);
-    caroussel2("mainImg",todasComidas);
+    caroussel2("imgDesayunos", desayunosArray);
+    caroussel2("imgComidas", comidasArray);
+    caroussel2("imgCenas", cenasArray);
+    caroussel2("imgSnacks", snacksArray);
+    caroussel2("mainImg", todasComidas);
     i++;
 }
-function caroussel2(imgId,imageArray){
-    $("#"+imgId).attr("src","img/"+imageArray[i%imageArray.length] );
+function caroussel2(imgId, imageArray) {
+    $("#" + imgId).attr("src", "img/" + imageArray[i % imageArray.length]);
 }
-    
+
+
 function encuentraImagenesRecetas() {
     var xmlhttp = new XMLHttpRequest();
     var url = "json/recetas.json";
