@@ -331,21 +331,21 @@
                                 $("#loader").show();
                                 var ing = [];
                                 var pro = [];
-                                
+
                                 $("#addedIngredients option").each(function (index, element) {
                                     var aux = {};
                                     var aux2 = {};
-                                    
+
                                     aux2["nombre"] = element.text;
                                     aux2["id"] = element.value;
-                                    
-                                    aux["unidad"] = $("#uni"+index+" option:selected").val();
-                                    aux["cantidad"] = $("#can"+index).val();
-                                    
+
+                                    aux["unidad"] = $("#uni" + index + " option:selected").val();
+                                    aux["cantidad"] = $("#can" + index).val();
+
                                     aux["ing"] = aux2;
                                     ing.push(aux);
                                 });
-                                
+
                                 var i;
                                 for (i = 0; i < arrayProcedures.length; i++) {
                                     var aux = {};
@@ -394,7 +394,7 @@
                 $('#anade').click(function () {
                     //$("#addedIngredients").empty();
                     $("#allIngredients option:selected").each(function (index, element) {
-                        if (!optionExists("#addedIngredients", element.value)) {                            
+                        if (!optionExists("#addedIngredients", element.value)) {
                             $("#addedIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
                             $(this).remove();
                         }
@@ -408,7 +408,6 @@
                         $("#allIngredients").append("<option value='" + element.value + "'>" + element.text + "</option>");
                         $(this).remove();
                     });
-
                 });
 
                 //Paso 2: Anadir Procedimientos
@@ -435,7 +434,7 @@
                     } else {
                         alert('campo vacio');
                     }
-                });                                
+                });
             });
         </script>
 
